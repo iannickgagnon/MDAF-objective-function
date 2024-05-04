@@ -29,3 +29,4 @@ class Rosenbrock(objective_function.ObjectiveFunction):
             float: The Rosenbrock function value at the given position.
         """
         return (1 - position[0]) ** 2 + 100 * (position[1] - position[0] ** 2) ** 2
+    
