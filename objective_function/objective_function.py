@@ -1,6 +1,6 @@
 import numpy as np
 from numbers import Number
-from typing import Iterable, Union
+from typing import Iterable
 import matplotlib.pyplot as plt
 from autograd import grad, hessian
 from abc import ABC, abstractmethod
