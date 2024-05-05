@@ -21,7 +21,8 @@ class ObjectiveFunction(ABC):
                  clamping_method: str = None):
         
         # Validate the size of the optimal solution position
-        assert len(optimal_solution_position) == dimensionality, "The size of the optimal solution position must match the dimensionality of the objective function."
+        if optimal_solution_position:
+            assert len(optimal_solution_position) == dimensionality, "The size of the optimal solution position must match the dimensionality of the objective function."
         self.parameters = parameters
         self.dimensionality = dimensionality
         self.optimal_solution_fitness = optimal_solution_fitness

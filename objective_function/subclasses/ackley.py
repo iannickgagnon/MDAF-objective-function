@@ -4,8 +4,6 @@ import numpy as np
 
 # Internal classes
 from .. import objective_function
-import timeit
-
 
 class Ackley(objective_function.ObjectiveFunction):
 

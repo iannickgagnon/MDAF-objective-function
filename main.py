@@ -1,9 +1,14 @@
 
+# External libraries
+import numpy as np
+
+# Internal libraries
 from objective_function.subclasses.sphere import Sphere
 from objective_function.subclasses.rosenbrock import Rosenbrock
 from objective_function.subclasses.rastrigin import Rastrigin
 from objective_function.subclasses.ackley import Ackley
 from objective_function.subclasses.griewank import Griewank
+from objective_function.subclasses.michalewicz import Michalewicz
 
 '''
 if __name__ == "__main__":
@@ -60,6 +65,7 @@ if __name__ == "__main__":
     print(f"Execution time of evaluate_b: {time_b} seconds")
 '''
 
+'''
 if __name__ == "__main__":
 
     # Create an instance of the Griewank objective function
@@ -67,14 +73,18 @@ if __name__ == "__main__":
 
     # Visualize the objective function in 2D
     griewank.visualize(dimensions=[0, 1], bounds=[(-5, 5), (-5, 5)], resolution=100)
+'''
 
-    '''
+
+if __name__ == "__main__":
 
     # Create an instance of the Michalewicz objective function
     michalewicz = Michalewicz(dimensionality=2, search_space_bounds=[(0, np.pi), (0, np.pi)])
 
     # Visualize the objective function in 2D
     michalewicz.visualize(dimensions=[0, 1], bounds=[(0, np.pi), (0, np.pi)], resolution=100)
+
+    '''
 
     # Create an instance of the Styblinski-Tang objective function
     styblinski_tang = StyblinskiTang(dimensionality=2, search_space_bounds=[(-5, 5), (-5, 5)])
