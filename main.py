@@ -10,6 +10,7 @@ from objective_function.subclasses.ackley import Ackley
 from objective_function.subclasses.griewank import Griewank
 from objective_function.subclasses.michalewicz import Michalewicz
 from objective_function.subclasses.styblinski_tang import StyblinskiTang
+from objective_function.subclasses.bulkin6 import Bulkin6 
 
 '''
 if __name__ == "__main__":
@@ -95,3 +96,11 @@ if __name__ == "__main__":
     # Visualize the objective function in 2D
     styblinski_tang.visualize(dimensions=[0, 1], bounds=[(-5, 5), (-5, 5)], resolution=100)
 '''
+
+if __name__ == "__main__":
+
+    # Create an instance of the Styblinski-Tang objective function
+    styblinski_tang = Bulkin6(dimensionality=2, search_space_bounds=[(-15, -5), (-3, 3)])
+
+    # Visualize the objective function in 2D
+    styblinski_tang.visualize(dimensions=[0, 1], bounds=[(-15, -5), (-3, 3)], resolution=100)
