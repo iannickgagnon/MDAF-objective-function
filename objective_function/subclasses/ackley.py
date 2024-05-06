@@ -9,31 +9,37 @@ class Ackley(objective_function.ObjectiveFunction):
 
     def __init__(self, 
                  parameters: dict = {},
-                 dimensionality: int = 2, 
-                 optimal_solution: float = 0.0,
-                 optimal_solution_position: np.ndarray = np.zeros(2),
-                 search_space_bounds: dict = None,
+                 dimensionality: int = None,
                  clamping_method: str = None):
         
-        # Validate parameters
+        # Configuration
+        if not dimensionality:
+            print("\033[93mWARNING: The input parameter 'dimensionality' is not set. The default value of 2 is used instead.\033[0m")
+            dimensionality = 10
+
         if 'A' not in parameters:
-            print("\033[93mWarning: The parameter 'A' is not set. The default value of 10 will be used.\033[0m")
+            print("\033[93mWARNING: The parameter 'A' is not set. The default value of 10 is used instead.\033[0m")
             parameters['A'] = 10
 
         if 'B' not in parameters:
-            print("\033[93mWarning: The parameter 'B' is not set. The default value of 0.2 will be used.\033[0m")
+            print("\033[93mWARNING: The parameter 'B' is not set. The default value of 0.2 is used instead.\033[0m")
             parameters['B'] = 0.2
 
         if 'C' not in parameters:
-            print("\033[93mWarning: The parameter 'C' is not set. The default value of 2 * pi will be used.\033[0m")
+            print("\033[93mWARNING: The parameter 'C' is not set. The default value of 2π is used instead.\033[0m")
             parameters['C'] = 2 * np.pi
 
-        super().__init__(parameters, 
-                         dimensionality, 
-                         optimal_solution, 
-                         optimal_solution_position, 
-                         search_space_bounds, 
-                         clamping_method)
+        # Adjust the optimal solution and search space bounds
+        optimal_solution = 0.0
+        optimal_solution_position = np.zeros(dimensionality)
+        search_space_bounds = np.array([[-32.768, 32.768]] * dimensionality)
+
+        super().__init__(parameters = parameters, 
+                         dimensionality = dimensionality, 
+                         optimal_solution_fitness = optimal_solution, 
+                         optimal_solution_position = optimal_solution_position, 
+                         search_space_bounds = search_space_bounds, 
+                         clamping_method = clamping_method)
         
     def evaluate(self, position: np.ndarray) -> float:
         """

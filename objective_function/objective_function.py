@@ -22,7 +22,13 @@ class ObjectiveFunction(ABC):
         
         # Validate the size of the optimal solution position
         if optimal_solution_position is not None:
-            assert len(optimal_solution_position) == dimensionality, "The size of the optimal solution position must match the dimensionality of the objective function."
+            assert len(optimal_solution_position) == dimensionality, \
+                "The size of the optimal solution position must match the dimensionality of the objective function."
+
+        # Validate the size of the search space bounds
+        assert len(search_space_bounds) == dimensionality, \
+            "The size of the search space bounds must match the dimensionality of the objective function."
+
         self.parameters = parameters
         self.dimensionality = dimensionality
         self.optimal_solution_fitness = optimal_solution_fitness
@@ -46,8 +52,8 @@ class ObjectiveFunction(ABC):
         pass
     
     def visualize(self, 
-                  dimensions: Iterable[int], 
-                  bounds: Iterable[Iterable[Number]], 
+                  dimensions: Iterable[int] = [0, 1], 
+                  plot_bounds: Iterable[Iterable[Number]] = None, 
                   resolution: int = 100):
         """
         Visualizes the objective function in 2D or 3D.
@@ -63,7 +69,12 @@ class ObjectiveFunction(ABC):
         """
         
         assert len(dimensions) in [1, 2], "The number of dimensions to visualize must be 2 or 3."
-        assert len(bounds) == len(dimensions), "The number of bounds must match the number of dimensions."
+        
+        # Adjust the plot bounds
+        if plot_bounds:
+            assert len(plot_bounds) == len(dimensions), "The number of bounds must match the number of dimensions."
+        else:
+            plot_bounds = self.search_space_bounds
         
         if len(dimensions) == 1:
 
@@ -75,8 +86,8 @@ class ObjectiveFunction(ABC):
             fig, axs = plt.subplots(1, 2, figsize=(12, 6))
 
             # Define the grid
-            x = np.linspace(bounds[0][0], bounds[0][1], resolution)
-            y = np.linspace(bounds[1][0], bounds[1][1], resolution)
+            x = np.linspace(plot_bounds[0][0], plot_bounds[0][1], resolution)
+            y = np.linspace(plot_bounds[1][0], plot_bounds[1][1], resolution)
             X, Y = np.meshgrid(x, y)
             
             # Evaluate the objective function at each grid point
