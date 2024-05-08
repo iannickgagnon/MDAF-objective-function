@@ -3,31 +3,30 @@
 import numpy as np
 
 # Internal classes
-from .. import objective_function
+from .. import objective_function as of
+
+DEFAULT_PARAMETERS = {'m': 10}
+
+DEFAULT_SETTINGS = of.DefaultSettings(dimensionality=2,
+                                      optimal_solution=None,
+                                      optimal_solution_position=None,
+                                      search_space_bounds=[(0, np.pi), (0, np.pi)],
+                                      clamping_method='random')
 
 
-class Michalewicz(objective_function.ObjectiveFunction):
+class Michalewicz(of.ObjectiveFunction):
 
-    def __init__(self, 
+    @of.constructor
+    def __init__(self,
                  parameters: dict = {},
-                 dimensionality: int = 2, 
-                 optimal_solution: float = None,
-                 optimal_solution_position: np.ndarray = None,
-                 search_space_bounds: dict = None,
-                 clamping_method: str = None):
-        
-        # Validate parameters
-        if 'm' not in parameters:
-            print("\033[93mWarning: The parameter 'm' is not set. The default value of 10 will be used.\033[0m")
-            parameters['m'] = 10
+                 settings: of.DefaultSettings = {}):
 
-        super().__init__(parameters, 
-                         dimensionality, 
-                         optimal_solution, 
-                         optimal_solution_position, 
-                         search_space_bounds, 
-                         clamping_method)
-        
+        # Validate the parameters and apply default values if necessary
+        self.validate_parameters(parameters, DEFAULT_PARAMETERS)
+
+        # Validate default settings
+        self.validate_settings(settings, DEFAULT_SETTINGS)
+
     def evaluate(self, position: np.ndarray) -> float:
         """
         Evaluates the Michalewicz function at the given position.

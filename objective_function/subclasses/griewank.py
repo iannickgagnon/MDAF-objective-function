@@ -3,25 +3,23 @@
 import numpy as np
 
 # Internal classes
-from .. import objective_function
+from .. import objective_function as of
+
+DEFAULT_SETTINGS = of.DefaultSettings(dimensionality= 2,
+                                      optimal_solution = 0.0, 
+                                      optimal_solution_position = np.zeros(2), 
+                                      search_space_bounds = np.array([[-32.768, 32.768], [-32.768, 32.768]]), 
+                                      clamping_method = 'random')
 
 
-class Griewank(objective_function.ObjectiveFunction):
+class Griewank(of.ObjectiveFunction):
 
-    def __init__(self, 
-                 parameters: dict = {},
-                 dimensionality: int = 2, 
-                 optimal_solution: float = 0.0,
-                 optimal_solution_position: np.ndarray = np.zeros(2),
-                 search_space_bounds: dict = None,
-                 clamping_method: str = None):
+    @of.constructor
+    def __init__(self,
+                 settings: dict = {}):
         
-        super().__init__(parameters, 
-                         dimensionality, 
-                         optimal_solution, 
-                         optimal_solution_position, 
-                         search_space_bounds, 
-                         clamping_method)
+        # Validate default settings
+        self.validate_settings(settings, DEFAULT_SETTINGS)
         
     def evaluate(self, position: np.ndarray) -> float:
         """

@@ -3,30 +3,23 @@
 import numpy as np
 
 # Internal classes
-from .. import objective_function
+from .. import objective_function as of
+
+DEFAULT_SETTINGS = of.DefaultSettings(dimensionality=2,
+                                      optimal_solution=None,
+                                      optimal_solution_position=None,
+                                      search_space_bounds=[(-5, 5), (-5, 5)],
+                                      clamping_method='random')
 
 
-class StyblinskiTang(objective_function.ObjectiveFunction):
+class StyblinskiTang(of.ObjectiveFunction):
 
-    def __init__(self, 
-                 parameters: dict = {},
-                 dimensionality: int = 2, 
-                 optimal_solution: float = -39.16599 * 2,
-                 optimal_solution_position: np.ndarray = np.array([-2.903534, -2.903534]),
-                 search_space_bounds: dict = None,
-                 clamping_method: str = None):
-        
-        # Validate parameters
-        if 'a' not in parameters:
-            print("\033[93mWarning: The parameter 'a' is not set. The default value of 2 will be used.\033[0m")
-            parameters['a'] = 2
+    @of.constructor
+    def __init__(self,
+                 settings: of.DefaultSettings = {}):
 
-        super().__init__(parameters, 
-                         dimensionality, 
-                         optimal_solution, 
-                         optimal_solution_position, 
-                         search_space_bounds, 
-                         clamping_method)
+        # Validate default settings
+        self.validate_settings(settings, DEFAULT_SETTINGS)
         
     def evaluate(self, position: np.ndarray) -> float:
         """

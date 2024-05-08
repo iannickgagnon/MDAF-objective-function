@@ -3,30 +3,29 @@
 import numpy as np
 
 # Internal classes
-from .. import objective_function
+from .. import objective_function as of
+
+DEFAULT_PARAMETERS = {'A': 10}
+
+DEFAULT_SETTINGS = of.DefaultSettings(dimensionality = 2, 
+                                      optimal_solution = 0.0, 
+                                      optimal_solution_position = np.zeros(2), 
+                                      search_space_bounds = np.array([[-5.15, 5.12], [-5.12, 5.12]]), 
+                                      clamping_method = 'random')
 
 
-class Rastrigin(objective_function.ObjectiveFunction):
+class Rastrigin(of.ObjectiveFunction):
 
-    def __init__(self, 
+    @of.constructor
+    def __init__(self,
                  parameters: dict = {},
-                 dimensionality: int = 2, 
-                 optimal_solution: float = 0.0,
-                 optimal_solution_position: np.ndarray = np.zeros(2),
-                 search_space_bounds: dict = None,
-                 clamping_method: str = None):
-        
-        # Validate parameters
-        if 'A' not in parameters:
-            print("\033[93mWarning: The parameter 'A' is not set. The default value of 10 will be used.\033[0m")
-            parameters['A'] = 10
+                 settings: of.DefaultSettings = {}):
 
-        super().__init__(parameters, 
-                         dimensionality, 
-                         optimal_solution, 
-                         optimal_solution_position, 
-                         search_space_bounds, 
-                         clamping_method)
+        # Validate the parameters and apply default values if necessary
+        self.validate_parameters(parameters, DEFAULT_PARAMETERS)
+
+        # Validate default settings
+        self.validate_settings(settings, DEFAULT_SETTINGS)
         
     def evaluate(self, position: np.ndarray) -> float:
         """

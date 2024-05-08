@@ -1,3 +1,5 @@
+
+# External libraries
 import numpy as np
 from numbers import Number
 from typing import Iterable
@@ -10,34 +12,123 @@ LEFT_CLICK = 1
 RIGHT_CLICK = 3
 
 
+def count_calls(foo: callable) -> callable:
+    """
+    Decorator that counts the number of calls to a method.
+
+    Args:
+        foo (callable): The function to count the number of calls to.
+
+    Returns:
+        callable: The decorated function.
+    """
+    def wrapper(self, *args, **kwargs):
+
+        # Increment the number of calls
+        self.nb_calls += 1
+
+        # Call the original function
+        return foo(self, *args, **kwargs)
+    
+    return wrapper
+
+
+def constructor(foo: callable):
+    """
+    Calls the super constructor after executing the subclass constructor.
+
+    Args:
+        foo (callable): The subclass constructor to be executed before calling the super constructor.
+
+    Returns:
+        callable: The wrapper function that executes the given function and calls the super constructor.
+
+    """
+    def wrapper(self, **kwargs):
+
+        # Call the subclass constructor
+        foo(self, **kwargs)
+
+        # Call the super constructor
+        super(self.__class__, self).__init__(**kwargs)
+
+    return wrapper
+
+
 class ObjectiveFunction(ABC):
 
-    def __init__(self,  
-                 parameters: dict = None,
-                 dimensionality: int = None, 
-                 optimal_solution_fitness: float = None,
-                 optimal_solution_position: np.ndarray = None,
-                 search_space_bounds: np.ndarray = None,
-                 clamping_method: str = None):
+    parameters: dict = {}
+
+    def __init__(self):
         
         # Validate the size of the optimal solution position
-        if optimal_solution_position is not None:
-            assert len(optimal_solution_position) == dimensionality, \
+        if self.optimal_solution_position is not None:
+            assert len(self.optimal_solution_position) == self.dimensionality, \
                 "The size of the optimal solution position must match the dimensionality of the objective function."
 
         # Validate the size of the search space bounds
-        assert len(search_space_bounds) == dimensionality, \
+        assert len(self.search_space_bounds) == self.dimensionality, \
             "The size of the search space bounds must match the dimensionality of the objective function."
 
-        self.parameters = parameters
-        self.dimensionality = dimensionality
-        self.optimal_solution_fitness = optimal_solution_fitness
-        self.optimal_solution_position = optimal_solution_position
-        self.search_space_bounds = search_space_bounds
-        self.clamping_method = clamping_method
+        # Initialize the number of objective function evaluations
+        self.nb_calls = 0
+
+        # Compute the first and second derivatives of the objective function's evaluation method
         self.first_derivative = grad(self.evaluate)
         self.second_derivative = hessian(self.evaluate)
 
+    def validate_parameters(self, parameters: dict, default_parameters: dict):
+        """
+        Validates the parameters of the objective function.
+
+        Args:
+            parameters (dict): The parameters to validate.
+            default_parameters (dict): The default parameters of the objective function.
+
+        Returns:
+            dict: The validated parameters.
+        """
+
+        # Check if the number of parameters exceeds the number of default parameters
+        assert len(parameters) <= len(default_parameters), \
+            "The number of parameters exceeds the number of default parameters."
+
+        # Make sure that all the provided parameters are also in the default parameters
+        for parameter_name in parameters:
+            assert parameter_name in default_parameters, \
+                f"'{parameter_name}' is not a valid parameter for this objective function. Valid parameters are {default_parameters.keys()}."
+
+        # Store the parameters and set default values as required
+        for parameter_name in default_parameters:
+            if parameter_name in parameters:
+                self.parameters[parameter_name] = parameters[parameter_name]
+            else:
+                default_value = default_parameters[parameter_name]
+                print(f"\033[93mWARNING: The '{parameter_name}' parameter is not set. The default value of {default_value} is used.\033[0m")
+                self.parameters[parameter_name] = default_value
+       
+    def validate_settings(self, settings: dict, default_settings: dict):
+        """
+        Validates the settings of the objective function.
+
+        Args:
+            settings (dict): The settings to validate.
+            default_settings (dict): The default settings of the objective function.
+
+        Returns:
+            dict: The validated settings.
+        """
+
+        # Store the settings and set default values as required
+        for setting_name in default_settings:
+            if setting_name in settings:
+                self.__dict__[setting_name] = settings[setting_name]
+            else:
+                default_value = default_settings[setting_name]
+                print(f"\033[93mWARNING: The '{setting_name}' setting is not set. The default value of {default_value} is used.\033[0m")
+                self.__dict__[setting_name] = default_value
+    
+    @count_calls
     @abstractmethod
     def evaluate(self, position: np.ndarray) -> float:
         """
@@ -50,7 +141,7 @@ class ObjectiveFunction(ABC):
             float: The objective function value at the given solution.
         """
         pass
-    
+     
     def visualize(self, 
                   dimensions: Iterable[int] = [0, 1], 
                   plot_bounds: Iterable[Iterable[Number]] = None, 
@@ -189,4 +280,42 @@ class ObjectiveFunction(ABC):
 
         # Check if the solution satisfies the constraints for each dimension
         return np.any((position < self.search_space_bounds[:, 0]) | (position > self.search_space_bounds[:, 1]))
+    
+    
+class DefaultSettings:
+    """
+    A class representing the default settings for the objective function.
+
+    Args:
+        dimensionality (int): The dimensionality of the problem.
+        optimal_solution (float): The optimal solution value.
+        optimal_solution_position (np.ndarray): The position of the optimal solution.
+        search_space_bounds (np.ndarray): The bounds of the search space.
+        clamping_method (str): The clamping method to be used.
+
+    Attributes:
+        Same as the arguments.
+    """
+
+    def __init__(self, 
+                 dimensionality: int,
+                 optimal_solution: float, 
+                 optimal_solution_position: np.ndarray, 
+                 search_space_bounds: np.ndarray, 
+                 clamping_method: str):
+        self.dimensionality = dimensionality
+        self.optimal_solution = optimal_solution
+        self.optimal_solution_position = optimal_solution_position
+        self.search_space_bounds = search_space_bounds
+        self.clamping_method = clamping_method
+
+    # Implement dictionary-like behavior
+    def __iter__(self):
+        return iter(self.__dict__)
+    
+    def __next__(self):
+        return next(self.__dict__)
+    
+    def __getitem__(self, key):
+        return getattr(self, key)
     
