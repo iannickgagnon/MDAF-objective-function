@@ -27,6 +27,12 @@ if __name__ == "__main__":
     Rastrigin().visualize()  
     '''
 
+    foo = Ackley()
+    print(foo.evaluate(np.array([0, 0])))
+    foo.apply_shift(np.array([10, 10]))
+    print(foo.evaluate(np.array([0, 0])))
+    foo.visualize()
+
     '''
     import timeit
     import numpy as np

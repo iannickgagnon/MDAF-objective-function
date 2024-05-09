@@ -1,6 +1,7 @@
 
 # External libraries
 import numpy as np
+from copy import deepcopy
 from numbers import Number
 from typing import Iterable
 import matplotlib.pyplot as plt
@@ -70,8 +71,11 @@ class ObjectiveFunction(ABC):
         assert len(self.search_space_bounds) == self.dimensionality, \
             "The size of the search space bounds must match the dimensionality of the objective function."
 
+        # Initialize shift
+        self.shift: np.ndarray = np.zeros(self.dimensionality)
+
         # Initialize the number of objective function evaluations
-        self.nb_calls = 0
+        self.nb_calls: int = 0
 
         # Compute the first and second derivatives of the objective function's evaluation method
         self.first_derivative = grad(self.evaluate)
@@ -141,7 +145,7 @@ class ObjectiveFunction(ABC):
             float: The objective function value at the given solution.
         """
         pass
-     
+    
     def visualize(self, 
                   dimensions: Iterable[int] = [0, 1], 
                   plot_bounds: Iterable[Iterable[Number]] = None, 
@@ -188,7 +192,7 @@ class ObjectiveFunction(ABC):
                     Z[i, j] = self.evaluate(np.array([X[i, j], Y[i, j]]))
 
             # Draw the contour plot with level curves
-            levels = np.linspace(np.min(Z), np.max(Z), resolution // 10)
+            levels = np.linspace(np.min(Z), np.max(Z), min(resolution // 10, 10))
             cs = axs[0].contourf(X, Y, Z, levels=levels, cmap='jet')
             axs[0].contour(cs, colors='k', linewidths=1.0)
             axs[0].set_xlabel(f"X{dimensions[0]}")
@@ -196,8 +200,27 @@ class ObjectiveFunction(ABC):
             axs[0].set_title("Contour Plot")
             axs[0].contour(cs, colors='k')
 
-            def on_contour_click(event):
-    
+            # Show the optimal solution on the contour plot
+            if self.optimal_solution_position is not None:
+                axs[0].scatter(self.optimal_solution_position[dimensions[0]], 
+                               self.optimal_solution_position[dimensions[1]], 
+                               color='yellow', 
+                               marker='*', 
+                               edgecolor='black', 
+                               s=200)
+            
+            def on_contour_click(event) -> None:
+                """
+                Event handler for mouse clicks on the contour plot. Adds a red sphere marker on 
+                the 3D plot for a left-click and removes the last marker for a right-click.
+
+                Args:
+                    event (MouseEvent): The mouse click event.
+
+                Returns:
+                    None
+                """
+
                 if event.button == LEFT_CLICK:
 
                     # Get the clicked coordinates
@@ -230,6 +253,16 @@ class ObjectiveFunction(ABC):
             axs[1].set_zlabel(f"f(X{dimensions[0]}, X{dimensions[1]})")
             axs[1].set_title("Surface Plot")
      
+            # Show the optimal solution on the surface plot
+            if self.optimal_solution_position is not None:
+                axs[1].scatter(self.optimal_solution_position[dimensions[0]], 
+                               self.optimal_solution_position[dimensions[1]], 
+                               self.optimal_solution, 
+                               color='yellow', 
+                               marker='*', 
+                               edgecolor='black', 
+                               s=200)
+
             # Adjust the layout
             plt.tight_layout()
 
@@ -281,7 +314,33 @@ class ObjectiveFunction(ABC):
         # Check if the solution satisfies the constraints for each dimension
         return np.any((position < self.search_space_bounds[:, 0]) | (position > self.search_space_bounds[:, 1]))
     
-    
+
+    def apply_shift(self, shift: np.ndarray) -> np.ndarray:
+        """
+        Shifts the given position by the given shift vector.
+
+        Args:
+            position (np.ndarray): The position to shift.
+            shift (np.ndarray): The shift vector.
+
+        Returns:
+            np.ndarray: The shifted position.
+        """
+        
+        # Shift the optimal solution position
+        if self.optimal_solution_position is not None:
+            self.optimal_solution_position += shift
+
+        # Copy the original evaluate method
+        evaluate_copy = deepcopy(self.evaluate)
+
+        # Define a new evaluate method that shifts the position before evaluating
+        def shifted_evaluate(position: np.ndarray) -> np.ndarray:
+            return evaluate_copy(position - shift)
+        
+        # Replace the original evaluate method with the shifted one
+        self.evaluate = shifted_evaluate
+
 class DefaultSettings:
     """
     A class representing the default settings for the objective function.
