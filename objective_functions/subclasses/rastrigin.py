@@ -4,14 +4,15 @@ import numpy as np
 
 # Internal classes
 from .. import objective_function as of
+from ..default_settings import DefaultSettings
 
 DEFAULT_PARAMETERS = {'A': 10}
 
-DEFAULT_SETTINGS = of.DefaultSettings(dimensionality = 2, 
-                                      optimal_solution = 0.0, 
-                                      optimal_solution_position = np.zeros(2), 
-                                      search_space_bounds = np.array([[-5.15, 5.12], [-5.12, 5.12]]), 
-                                      clamping_method = 'random')
+DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2, 
+                                   optimal_solution = 0.0, 
+                                   optimal_solution_position = np.zeros(2), 
+                                   search_space_bounds = np.array([[-5.15, 5.12], [-5.12, 5.12]]), 
+                                   clamping_method = 'random')
 
 
 class Rastrigin(of.ObjectiveFunction):
@@ -19,7 +20,7 @@ class Rastrigin(of.ObjectiveFunction):
     @of.constructor
     def __init__(self,
                  parameters: dict = {},
-                 settings: of.DefaultSettings = {}):
+                 settings: DefaultSettings = {}):
 
         # Validate the parameters and apply default values if necessary
         self.validate_parameters(parameters, DEFAULT_PARAMETERS)

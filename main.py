@@ -3,15 +3,15 @@
 import numpy as np
 
 # Internal libraries
-from objective_function.subclasses.sphere import Sphere
-from objective_function.subclasses.rosenbrock import Rosenbrock
-from objective_function.subclasses.rastrigin import Rastrigin
-from objective_function.subclasses.ackley import Ackley
-from objective_function.subclasses.griewank import Griewank
-from objective_function.subclasses.michalewicz import Michalewicz
-from objective_function.subclasses.styblinski_tang import StyblinskiTang
-from objective_function.subclasses.bulkin6 import Bulkin6 
-from objective_function.subclasses.dropwave import DropWave
+from objective_functions.subclasses.sphere import Sphere
+from objective_functions.subclasses.rosenbrock import Rosenbrock
+from objective_functions.subclasses.rastrigin import Rastrigin
+from objective_functions.subclasses.ackley import Ackley
+from objective_functions.subclasses.griewank import Griewank
+from objective_functions.subclasses.michalewicz import Michalewicz
+from objective_functions.subclasses.styblinski_tang import StyblinskiTang
+from objective_functions.subclasses.bulkin6 import Bulkin6 
+from objective_functions.subclasses.dropwave import DropWave
 
 if __name__ == "__main__":
 

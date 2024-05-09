@@ -4,19 +4,20 @@ import numpy as np
 
 # Internal classes
 from .. import objective_function as of
+from ..default_settings import DefaultSettings
 
-DEFAULT_SETTINGS = of.DefaultSettings(dimensionality=2,
-                                      optimal_solution=None,
-                                      optimal_solution_position=None,
-                                      search_space_bounds=[(-5, 5), (-5, 5)],
-                                      clamping_method='random')
+DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
+                                   optimal_solution=None,
+                                   optimal_solution_position=None,
+                                   search_space_bounds=[(-5, 5), (-5, 5)],
+                                   clamping_method='random')
 
 
 class StyblinskiTang(of.ObjectiveFunction):
 
     @of.constructor
     def __init__(self,
-                 settings: of.DefaultSettings = {}):
+                 settings: DefaultSettings = {}):
 
         # Validate default settings
         self.validate_settings(settings, DEFAULT_SETTINGS)

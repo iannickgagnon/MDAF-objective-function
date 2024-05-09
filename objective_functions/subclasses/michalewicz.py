@@ -4,14 +4,15 @@ import numpy as np
 
 # Internal classes
 from .. import objective_function as of
+from ..default_settings import DefaultSettings
 
 DEFAULT_PARAMETERS = {'m': 10}
 
-DEFAULT_SETTINGS = of.DefaultSettings(dimensionality=2,
-                                      optimal_solution=None,
-                                      optimal_solution_position=None,
-                                      search_space_bounds=[(0, np.pi), (0, np.pi)],
-                                      clamping_method='random')
+DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
+                                   optimal_solution=None,
+                                   optimal_solution_position=None,
+                                   search_space_bounds=[(0, np.pi), (0, np.pi)],
+                                   clamping_method='random')
 
 
 class Michalewicz(of.ObjectiveFunction):
@@ -19,7 +20,7 @@ class Michalewicz(of.ObjectiveFunction):
     @of.constructor
     def __init__(self,
                  parameters: dict = {},
-                 settings: of.DefaultSettings = {}):
+                 settings: DefaultSettings = {}):
 
         # Validate the parameters and apply default values if necessary
         self.validate_parameters(parameters, DEFAULT_PARAMETERS)
