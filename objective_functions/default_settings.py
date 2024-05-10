@@ -12,7 +12,6 @@ class DefaultSettings:
         optimal_solution (float): The optimal solution value.
         optimal_solution_position (np.ndarray): The position of the optimal solution.
         search_space_bounds (np.ndarray): The bounds of the search space.
-        clamping_method (str): The clamping method to be used.
 
     Attributes:
         Same as the arguments.
@@ -28,7 +27,6 @@ class DefaultSettings:
         self.optimal_solution = optimal_solution
         self.optimal_solution_position = optimal_solution_position
         self.search_space_bounds = search_space_bounds
-        self.clamping_method = clamping_method
 
     # Implement dictionary-like behavior
     def __iter__(self):

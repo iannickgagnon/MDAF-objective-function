@@ -11,8 +11,7 @@ DEFAULT_PARAMETERS = {'A': 10}
 DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2, 
                                    optimal_solution = 0.0, 
                                    optimal_solution_position = np.zeros(2), 
-                                   search_space_bounds = np.array([[-5.15, 5.12], [-5.12, 5.12]]), 
-                                   clamping_method = 'random')
+                                   search_space_bounds = np.array([[-5.15, 5.12], [-5.12, 5.12]]))
 
 
 class Rastrigin(of.ObjectiveFunction):

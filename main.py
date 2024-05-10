@@ -28,10 +28,8 @@ if __name__ == "__main__":
     '''
 
     foo = Sphere()
-    print(foo.evaluate(np.array([0, 0])))
     foo.apply_shift(np.array([1, 1]))
     foo.apply_noise(np.random.randn)
-    print(foo.evaluate(np.array([0, 0])))
     foo.visualize()
 
     '''

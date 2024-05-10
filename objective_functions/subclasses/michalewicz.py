@@ -11,8 +11,7 @@ DEFAULT_PARAMETERS = {'m': 10}
 DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
                                    optimal_solution=None,
                                    optimal_solution_position=None,
-                                   search_space_bounds=[(0, np.pi), (0, np.pi)],
-                                   clamping_method='random')
+                                   search_space_bounds=[(0, np.pi), (0, np.pi)])
 
 
 class Michalewicz(of.ObjectiveFunction):
