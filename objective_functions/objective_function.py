@@ -398,4 +398,3 @@ class ObjectiveFunction(ABC):
             obj = pickle.load(f)
             print("\033[92mObjectiveFunction state loaded from {path}\033[0m")
             return obj
-        

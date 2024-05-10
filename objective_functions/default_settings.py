@@ -21,8 +21,7 @@ class DefaultSettings:
                  dimensionality: int,
                  optimal_solution: float, 
                  optimal_solution_position: np.ndarray, 
-                 search_space_bounds: np.ndarray, 
-                 clamping_method: str):
+                 search_space_bounds: np.ndarray):
         self.dimensionality = dimensionality
         self.optimal_solution = optimal_solution
         self.optimal_solution_position = optimal_solution_position
