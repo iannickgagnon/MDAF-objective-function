@@ -63,13 +63,12 @@ class ObjectiveFunction(ABC):
     def __init__(self):
         
         # Validate the size of the optimal solution position
-        if self.optimal_solution_position is not None:
-            assert len(self.optimal_solution_position) == self.dimensionality, \
-                "The size of the optimal solution position must match the dimensionality of the objective function."
+        if self.optimal_solution_position is not None and len(self.optimal_solution_position) != self.dimensionality:
+                raise ValueError("The size of the optimal solution position must match the dimensionality of the objective function.")
 
         # Validate the size of the search space bounds
-        assert len(self.search_space_bounds) == self.dimensionality, \
-            "The size of the search space bounds must match the dimensionality of the objective function."
+        if len(self.search_space_bounds) != self.dimensionality:
+            raise ValueError("The size of the search space bounds must match the dimensionality of the objective function.")
 
         # Initialize shift
         self.shift: np.ndarray = np.zeros(self.dimensionality)
@@ -94,13 +93,13 @@ class ObjectiveFunction(ABC):
         """
 
         # Check if the number of parameters exceeds the number of default parameters
-        assert len(parameters) <= len(default_parameters), \
-            "The number of parameters exceeds the number of default parameters."
+        if len(parameters) > len(default_parameters):
+            raise ValueError("The number of parameters exceeds the number of default parameters.")
 
         # Make sure that all the provided parameters are also in the default parameters
         for parameter_name in parameters:
-            assert parameter_name in default_parameters, \
-                f"'{parameter_name}' is not a valid parameter for this objective function. Valid parameters are {default_parameters.keys()}."
+            if parameter_name not in default_parameters:
+                raise ValueError(f"'{parameter_name}' is not a valid parameter for this objective function. Valid parameters are {default_parameters.keys()}.")
 
         # Store the parameters and set default values as required
         for parameter_name in default_parameters:
@@ -163,11 +162,12 @@ class ObjectiveFunction(ABC):
             AssertionError: If the number of bounds does not match the number of dimensions.
         """
         
-        assert len(dimensions) in [1, 2], "The number of dimensions to visualize must be 2 or 3."
+        if len(dimensions) not in [1, 2]:
+            raise ValueError("The number of dimensions to visualize must be 2 or 3.")
         
         # Adjust the plot bounds
-        if plot_bounds:
-            assert len(plot_bounds) == len(dimensions), "The number of bounds must match the number of dimensions."
+        if plot_bounds and len(plot_bounds) != len(dimensions):
+            raise ValueError("The number of bounds must match the number of dimensions.")
         else:
             plot_bounds = self.search_space_bounds
         
@@ -309,7 +309,9 @@ class ObjectiveFunction(ABC):
             ValueError: If no constraints on the search space have been defined for this objective function.
         """
 
-        assert self.search_space_bounds, "No constraints on the search space have been defined for this objective function."
+        # Check if the search space bounds have been defined
+        if not self.search_space_bounds:
+            raise ValueError("No constraints on the search space have been defined for this objective function.")
 
         # Check if the solution satisfies the constraints for each dimension
         return np.any((position < self.search_space_bounds[:, 0]) | (position > self.search_space_bounds[:, 1]))
