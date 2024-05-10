@@ -147,7 +147,7 @@ class ObjectiveFunction(ABC):
         pass
     
     def visualize(self, 
-                  dimensions: Iterable[int] = [0, 1], 
+                  dimensions: Iterable[int] = (0, 1), 
                   plot_bounds: Iterable[Iterable[Number]] = None, 
                   resolution: int = 100):
         """
@@ -163,7 +163,7 @@ class ObjectiveFunction(ABC):
             AssertionError: If the number of bounds does not match the number of dimensions.
         """
         
-        if len(dimensions) not in [1, 2]:
+        if len(dimensions) not in (1, 2):
             raise ValueError("The number of dimensions to visualize must be 2 or 3.")
         
         # Adjust the plot bounds
@@ -174,41 +174,53 @@ class ObjectiveFunction(ABC):
         
         if len(dimensions) == 1:
 
-            pass
+            # Create the figure and axis
+            fig, ax = plt.subplots(figsize=(8, 6))
 
-        else:
+            # Define the grid for the single dimension
+            x = np.linspace(plot_bounds[0][0], plot_bounds[0][1], resolution)
 
-            # 2D contour visualization
+            # Vectorized evaluation of the objective function
+            Z = self.evaluate(x.reshape(-1, 1))  # Reshape for function evaluation, assuming 'evaluate' can handle an array
+
+            # Draw the line plot
+            ax.plot(x, Z, label=f'Objective Function along X{dimensions[0]}')
+            ax.set_xlabel(f'X{dimensions[0]}')
+            ax.set_ylabel('Fitness')
+            ax.set_title('1D Visualization of Objective Function')
+            ax.legend()
+
+            plt.show()
+
+        elif len(dimensions) == 2:
+
+            # Create the figure and axes
             fig, axs = plt.subplots(1, 2, figsize=(12, 6))
 
             # Define the grid
-            x = np.linspace(plot_bounds[0][0], plot_bounds[0][1], resolution)
-            y = np.linspace(plot_bounds[1][0], plot_bounds[1][1], resolution)
+            x_min, x_max = plot_bounds[0]
+            y_min, y_max = plot_bounds[1]
+            x = np.linspace(x_min, x_max, resolution)
+            y = np.linspace(y_min, y_max, resolution)
             X, Y = np.meshgrid(x, y)
-            
-            # Evaluate the objective function at each grid point
-            Z = np.zeros((resolution, resolution))
-            for i in range(resolution):
-                for j in range(resolution):
-                    Z[i, j] = self.evaluate(np.array([X[i, j], Y[i, j]]))
+
+            # Vectorized evaluation of the objective function
+            positions = np.vstack([X.ravel(), Y.ravel()]).T
+            Z = np.array([self.evaluate(position) for position in positions]).reshape(X.shape)
 
             # Draw the contour plot with level curves
-            levels = np.linspace(np.min(Z), np.max(Z), min(resolution // 10, 10))
+            levels = np.linspace(np.min(Z), np.max(Z), num=min(resolution // 10, 10))
             cs = axs[0].contourf(X, Y, Z, levels=levels, cmap='jet')
             axs[0].contour(cs, colors='k', linewidths=1.0)
             axs[0].set_xlabel(f"X{dimensions[0]}")
             axs[0].set_ylabel(f"X{dimensions[1]}")
-            axs[0].set_title("Contour Plot")
-            axs[0].contour(cs, colors='k')
+            axs[0].set_title("2D Contour Plot")
 
             # Show the optimal solution on the contour plot
             if self.optimal_solution_position is not None:
-                axs[0].scatter(self.optimal_solution_position[dimensions[0]], 
-                               self.optimal_solution_position[dimensions[1]], 
-                               color='yellow', 
-                               marker='*', 
-                               edgecolor='black', 
-                               s=200)
+                axs[0].scatter(self.optimal_solution_position[dimensions[0]],
+                            self.optimal_solution_position[dimensions[1]],
+                            color='yellow', marker='*', edgecolor='black', s=200)
             
             def on_contour_click(event) -> None:
                 """
