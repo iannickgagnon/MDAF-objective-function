@@ -2,6 +2,7 @@
 # External libraries
 import numpy as np
 from copy import deepcopy
+from typing import Callable
 from numbers import Number
 from typing import Iterable
 import matplotlib.pyplot as plt
@@ -13,15 +14,15 @@ LEFT_CLICK = 1
 RIGHT_CLICK = 3
 
 
-def count_calls(foo: callable) -> callable:
+def count_calls(foo: Callable) -> Callable:
     """
     Decorator that counts the number of calls to a method.
 
     Args:
-        foo (callable): The function to count the number of calls to.
+        foo (Callable): The function to count the number of calls to.
 
     Returns:
-        callable: The decorated function.
+        Callable: The decorated function.
     """
     def wrapper(self, *args, **kwargs):
 
@@ -34,15 +35,15 @@ def count_calls(foo: callable) -> callable:
     return wrapper
 
 
-def constructor(foo: callable):
+def constructor(foo: Callable):
     """
     Calls the super constructor after executing the subclass constructor.
 
     Args:
-        foo (callable): The subclass constructor to be executed before calling the super constructor.
+        foo (Callable): The subclass constructor to be executed before calling the super constructor.
 
     Returns:
-        callable: The wrapper function that executes the given function and calls the super constructor.
+        Callable: The wrapper function that executes the given function and calls the super constructor.
 
     """
     def wrapper(self, **kwargs):
@@ -344,7 +345,7 @@ class ObjectiveFunction(ABC):
         self.evaluate = shifted_evaluate
     
     
-    def apply_noise(self, noisy_foo: callable) -> None:
+    def apply_noise(self, noisy_foo: Callable) -> None:
 
          # Copy the original evaluate method
         evaluate_copy = deepcopy(self.evaluate)
