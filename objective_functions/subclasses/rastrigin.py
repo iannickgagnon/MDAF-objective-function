@@ -36,7 +36,7 @@ class Rastrigin(of.ObjectiveFunction):
 
         Returns:
             float: The Rastrigin function value at the given position.
-        """
+        """    
         n = len(position)
         A = self.parameters.get('A', 10)
         return A * n + np.sum(position**2 - A * np.cos(2 * np.pi * position))

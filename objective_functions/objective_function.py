@@ -1,18 +1,25 @@
 
 # External libraries
+import os
+import re
 import pickle
+import inspect
 import numpy as np
 from copy import deepcopy
-from typing import Callable
 from numbers import Number
+from typing import Callable 
 from typing import Iterable
 import matplotlib.pyplot as plt
 from autograd import grad, hessian
 from abc import ABC, abstractmethod
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # Internal constants
 LEFT_CLICK = 1
 RIGHT_CLICK = 3
+
+# Internal paths
+DECOUPLED_FUNCTION_PATH = './objective_functions/tmp/decoupled_evaluate.py'
 
 
 def count_calls(foo: Callable) -> Callable:
@@ -82,6 +89,7 @@ class ObjectiveFunction(ABC):
         self.first_derivative = grad(self.evaluate)
         self.second_derivative = hessian(self.evaluate)
 
+
     def validate_parameters(self, parameters: dict, default_parameters: dict):
         """
         Validates the parameters of the objective function.
@@ -112,6 +120,7 @@ class ObjectiveFunction(ABC):
                 print(f"\033[93mWARNING: The '{parameter_name}' parameter is not set. The default value of {default_value} is used.\033[0m")
                 self.parameters[parameter_name] = default_value
        
+
     def validate_settings(self, settings: dict, default_settings: dict):
         """
         Validates the settings of the objective function.
@@ -147,6 +156,61 @@ class ObjectiveFunction(ABC):
         """
         pass
     
+    
+    def parallel_evaluate(self, positions: np.ndarray, max_workers: int = None) -> np.ndarray:
+        """
+        Evaluates multiple positions in parallel using ProcessPoolExecutor.
+
+        Args:
+            positions (np.ndarray): An array of positions to evaluate. Each row corresponds to a position.
+            max_workers (int): The maximum number of processes that can be used to execute the given calls.
+
+        Returns:
+            np.ndarray: An array of objective function values corresponding to the input positions.
+        """
+
+        try:
+
+            # Export the evaluate function as a top-level function in a separate file
+            self.__decouple_evaluate()
+
+            # Import the decoupled evaluate function
+            if os.path.exists(DECOUPLED_FUNCTION_PATH):
+                try:
+                    from objective_functions.tmp.decoupled_evaluate import evaluate as decoupled_evaluate   # type: ignore
+                except Exception as e:
+                    raise Exception(f"Failed to import the decoupled evaluate method with traceback: {e}")
+
+        except Exception as e:
+
+            # Delete the decoupled evaluate function file
+            self.__delete_decoupled_evaluate()
+
+            raise Exception(f"Failed to decouple the evaluate method with traceback: {e}")
+
+        with ProcessPoolExecutor(max_workers=max_workers) as executor:
+
+            # Submit all evaluations to the executor
+            future_to_position = {executor.submit(decoupled_evaluate, pos): pos for pos in positions}
+
+            # Collect results as they are completed
+            results = np.zeros(len(positions))
+            for future in as_completed(future_to_position):
+                pos = future_to_position[future]
+                try:
+                    result = future.result()
+                except Exception as exc:
+                    print(f'{pos} generated an exception: {exc}')
+                else:
+                    index = np.where((positions == pos).all(axis=1))[0][0]
+                    results[index] = result
+        
+        # Delete the decoupled evaluate function file
+        self.__delete_decoupled_evaluate()
+
+        return results
+
+
     def visualize(self, 
                   dimensions: Iterable[int] = (0, 1), 
                   plot_bounds: Iterable[Iterable[Number]] = None, 
@@ -282,7 +346,7 @@ class ObjectiveFunction(ABC):
 
             plt.show()
 
-
+    
     def compute_first_derivative(self, position: np.ndarray) -> np.ndarray:
         """
         Computes the first derivative of the objective function at the given position.
@@ -307,8 +371,8 @@ class ObjectiveFunction(ABC):
             np.ndarray: The second derivative of the objective function at the given position.
         """
         return self.second_derivative(position)
-
-
+    
+        
     def check_constraints(self, position: np.ndarray) -> bool:
         """
         Checks if the given solution satisfies the constraints defined by the search space bounds.
@@ -380,9 +444,9 @@ class ObjectiveFunction(ABC):
         """
         with open(path, 'wb') as file:
             pickle.dump(self, file)
-            print("\033[92mObjectiveFunction state saved to {path}\033[0m")
-    
+            print("\033[92mObjectiveFunction state saved in {path}\033[0m")
 
+            
     @staticmethod
     def load(path: str):
         """
@@ -398,3 +462,56 @@ class ObjectiveFunction(ABC):
             obj = pickle.load(f)
             print("\033[92mObjectiveFunction state loaded from {path}\033[0m")
             return obj
+
+
+    def __decouple_evaluate(self):
+        """
+        Decouples the evaluate method from the objective function instance.
+        """
+
+        # Get the cleartext code of the evaluate method
+        cleartext_code = inspect.getsource(self.evaluate)
+
+        # Remove docstrings
+        cleartext_code = re.sub(r'\"\"\".*?\"\"\"', '', cleartext_code, flags=re.DOTALL)
+
+        # Split the code into lines
+        raw_lines = cleartext_code.split('\n')
+
+        # Remove empty lines
+        code_lines = [line for line in raw_lines if line.strip()]
+
+        # Count the number of leading spaces of the first line
+        leading_spaces = len(code_lines[0]) - len(code_lines[0].lstrip())
+
+        # Remove the first leading spaces from all the lines
+        code_lines = [line[leading_spaces:] for line in code_lines]
+
+        # Combine the code lines into a single string
+        reassembled_code = '\n'.join(code_lines)
+
+        # Remove references to self
+        reassembled_code = reassembled_code.replace('self,', '')
+
+        # Save the decoupled evaluate method to a file
+        with open(DECOUPLED_FUNCTION_PATH, 'w') as file_write:
+            
+            with open(__file__, 'r') as file_read:
+
+                # Import all the libraries used in the objective_function.py file
+                for line in file_read.readlines():
+                    if 'def' in line:
+                        break
+                    elif 'import' in line:
+                        file_write.write(f'{line.strip()}\n')
+
+            # Write the decoupled evaluate method
+            file_write.write(reassembled_code)
+
+    @staticmethod
+    def __delete_decoupled_evaluate() -> None:
+        """
+        Deletes the decoupled evaluate method file.
+        """
+        if os.path.exists(DECOUPLED_FUNCTION_PATH):
+            os.remove(DECOUPLED_FUNCTION_PATH)
