@@ -226,7 +226,7 @@ class ObjectiveFunction(ABC):
                     # Get the clicked coordinates
                     x, y = event.xdata, event.ydata
 
-                    # This is a workaround to avoid a bug in matplotlib where a left-click even is always triggered around (0, 0)
+                    # This is a workaround to avoid a 'bug' in matplotlib where a left-click event is always triggered around (0, 0)
                     if x is None or x is None or (np.abs(x) < 0.1 and np.abs(y) < 0.1):
                         return
 
@@ -315,7 +315,7 @@ class ObjectiveFunction(ABC):
         return np.any((position < self.search_space_bounds[:, 0]) | (position > self.search_space_bounds[:, 1]))
     
 
-    def apply_shift(self, shift: np.ndarray) -> np.ndarray:
+    def apply_shift(self, shift: np.ndarray) -> None:
         """
         Shifts the given position by the given shift vector.
 
@@ -341,3 +341,15 @@ class ObjectiveFunction(ABC):
         # Replace the original evaluate method with the shifted one
         self.evaluate = shifted_evaluate
     
+    
+    def apply_noise(self, noisy_foo: callable) -> None:
+
+         # Copy the original evaluate method
+        evaluate_copy = deepcopy(self.evaluate)
+
+        # Define a new evaluate method that shifts the position before evaluating
+        def noisy_evaluate(position: np.ndarray) -> np.ndarray:
+            return evaluate_copy(position) + noisy_foo()
+        
+        # Replace the original evaluate method with the shifted one
+        self.evaluate = noisy_evaluate
