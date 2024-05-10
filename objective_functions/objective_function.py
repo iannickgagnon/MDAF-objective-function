@@ -1,5 +1,6 @@
 
 # External libraries
+import pickle
 import numpy as np
 from copy import deepcopy
 from typing import Callable
@@ -368,3 +369,33 @@ class ObjectiveFunction(ABC):
         
         # Replace the original evaluate method with the shifted one
         self.evaluate = noisy_evaluate
+
+
+    def save(self, path: str) -> None:
+        """
+        Saves the objective function to a file.
+
+        Args:
+            path (str): The path to save the objective function to.
+        """
+        with open(path, 'wb') as file:
+            pickle.dump(self, file)
+            print("\033[92mObjectiveFunction state saved to {path}\033[0m")
+    
+
+    @staticmethod
+    def load(path: str):
+        """
+        Deserialize the state of the objective function from a file.
+
+        Args:
+            filename (str): The path to the file from which the object state will be loaded.
+
+        Returns:
+            ObjectiveFunction: The deserialized objective function object.
+        """
+        with open(path, 'rb') as f:
+            obj = pickle.load(f)
+            print("\033[92mObjectiveFunction state loaded from {path}\033[0m")
+            return obj
+        
