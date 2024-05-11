@@ -19,7 +19,7 @@ LEFT_CLICK = 1
 RIGHT_CLICK = 3
 
 # Internal paths
-DECOUPLED_FUNCTION_PATH = './objective_functions/tmp/decoupled_evaluate.py'
+DECOUPLED_FUNCTION_PATH = './src/objective_functions/tmp/decoupled_evaluate.py'
 
 
 def count_calls(foo: Callable) -> Callable:
@@ -159,7 +159,7 @@ class ObjectiveFunction(ABC):
     
     def parallel_evaluate(self, positions: np.ndarray, max_workers: int = None) -> np.ndarray:
         """
-        Evaluates multiple positions in parallel using ProcessPoolExecutor.
+        Evaluates multiple positions in parallel.
 
         Args:
             positions (np.ndarray): An array of positions to evaluate. Each row corresponds to a position.
@@ -179,7 +179,7 @@ class ObjectiveFunction(ABC):
                 try:
                     from objective_functions.tmp.decoupled_evaluate import evaluate as decoupled_evaluate   # type: ignore
                 except Exception as e:
-                    raise Exception(f"Failed to import the decoupled evaluate method with traceback: {e}")
+                    raise ImportError(f"Failed to import the decoupled evaluate method with traceback: {e}")
 
         except Exception as e:
 
@@ -199,8 +199,8 @@ class ObjectiveFunction(ABC):
                 pos = future_to_position[future]
                 try:
                     result = future.result()
-                except Exception as exc:
-                    print(f'{pos} generated an exception: {exc}')
+                except Exception as e:
+                    print(f'{pos} generated an exception: {e}')
                 else:
                     index = np.where((positions == pos).all(axis=1))[0][0]
                     results[index] = result

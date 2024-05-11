@@ -1,0 +1,20 @@
+{
+
+    // Specify which environment file to use
+    "python.envFile": "${workspaceFolder}/.env",
+
+    // Specify the test framework and arguments
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    
+    // File explorer settings
+    "files.exclude": {
+        "**/.pytest_cache": true,
+        "**/.git": true,
+        "**/__pycache__": true,
+        "**/__init__.py": true,
+    }
+
+}

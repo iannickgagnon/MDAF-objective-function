@@ -3,15 +3,15 @@
 import numpy as np
 
 # Internal libraries
-from objective_functions.subclasses.sphere import Sphere
-from objective_functions.subclasses.rosenbrock import Rosenbrock
-from objective_functions.subclasses.rastrigin import Rastrigin
-from objective_functions.subclasses.ackley import Ackley
-from objective_functions.subclasses.griewank import Griewank
-from objective_functions.subclasses.michalewicz import Michalewicz
-from objective_functions.subclasses.styblinski_tang import StyblinskiTang
-from objective_functions.subclasses.bulkin6 import Bulkin6 
-from objective_functions.subclasses.dropwave import DropWave
+from src.objective_functions.subclasses.sphere import Sphere
+from src.objective_functions.subclasses.rosenbrock import Rosenbrock
+from src.objective_functions.subclasses.rastrigin import Rastrigin
+from src.objective_functions.subclasses.ackley import Ackley
+from src.objective_functions.subclasses.griewank import Griewank
+from src.objective_functions.subclasses.michalewicz import Michalewicz
+from src.objective_functions.subclasses.styblinski_tang import StyblinskiTang
+from src.objective_functions.subclasses.bulkin6 import Bulkin6 
+from src.objective_functions.subclasses.dropwave import DropWave
 
 if __name__ == "__main__":
 
@@ -28,6 +28,8 @@ if __name__ == "__main__":
     '''
 
     foo = Sphere()
+
+    foo.visualize()
     #foo.apply_shift(np.array([1, 1]))
     #foo.apply_noise(np.random.randn)
     #print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))

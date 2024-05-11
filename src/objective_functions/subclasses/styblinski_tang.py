@@ -4,7 +4,7 @@ import numpy as np
 
 # Internal classes
 from .. import objective_function as of
-from ..default_settings import DefaultSettings
+from .. default_settings import DefaultSettings
 
 DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
                                    optimal_solution=None,
