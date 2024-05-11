@@ -313,8 +313,8 @@ class ObjectiveFunction(ABC):
 
                 if event.button == RIGHT_CLICK:
                     
-                    # Remove the last sphere marker on the 3D plot for a right-click
-                    if len(axs[1].collections) > 1:
+                    # Remove the previous sphere marker on the 3D plot for a right-click
+                    if len(axs[1].collections) > 2:
                         axs[1].collections[-1].remove()
                     
                 plt.draw()
