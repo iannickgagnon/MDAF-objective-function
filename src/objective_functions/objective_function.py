@@ -7,11 +7,10 @@ import inspect
 import numpy as np
 from copy import deepcopy
 from numbers import Number
-from typing import Callable 
-from typing import Iterable
 import matplotlib.pyplot as plt
 from autograd import grad, hessian
 from abc import ABC, abstractmethod
+from typing import Callable, Iterable 
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # Internal constants
@@ -81,6 +80,7 @@ class ObjectiveFunction(ABC):
 
         # Initialize shift
         self.shift: np.ndarray = np.zeros(self.dimensionality)
+        self.noise: Callable = None
 
         # Initialize the number of objective function evaluations
         self.nb_calls: int = 0
@@ -418,6 +418,9 @@ class ObjectiveFunction(ABC):
         def shifted_evaluate(position: np.ndarray) -> np.ndarray:
             return evaluate_copy(position - shift)
         
+        # Store the shift vector
+        self.shift = shift
+
         # Replace the original evaluate method with the shifted one
         self.evaluate = shifted_evaluate
     
@@ -486,6 +489,23 @@ class ObjectiveFunction(ABC):
         return code
 
 
+    def __remove_docstrings(self, code: str) -> str:
+        """
+        Removes docstrings from the given code.
+
+        Args:
+            code (str): The code string to remove docstrings from.
+        
+        Returns:
+            str: The modified code string with docstrings removed.
+        """
+
+        code = re.sub(r'\"\"\".*?\"\"\"', '', code, flags=re.DOTALL)
+        code = re.sub(r"'''.*?'''", '', code, flags=re.DOTALL)
+
+        return code
+
+
     def __decouple_evaluate(self):
         """
         Decouples the evaluate method from the objective function instance.
@@ -495,8 +515,7 @@ class ObjectiveFunction(ABC):
         cleartext_code = inspect.getsource(self.evaluate)
 
         # Remove docstrings
-        cleartext_code = re.sub(r'\"\"\".*?\"\"\"', '', cleartext_code, flags=re.DOTALL)
-        cleartext_code = re.sub(r"'''.*?'''", '', cleartext_code, flags=re.DOTALL)
+        cleartext_code = self.__remove_docstrings(cleartext_code)
         
         # Remove self parameter
         cleartext_code = re.sub(r'self,', '', cleartext_code)
@@ -526,7 +545,7 @@ class ObjectiveFunction(ABC):
 
                 # Import all the libraries used in the objective_function.py file
                 for line in file_read.readlines():
-                    if 'def ' in line:
+                    if line.startswith('def '):
                         break
                     elif 'import' in line:
                         file_write.write(f'{line.strip()}\n')
