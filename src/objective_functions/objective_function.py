@@ -179,7 +179,7 @@ class ObjectiveFunction(ABC):
 
         Args:
             nb_runs (int, optional): The number of times to run the evaluate method. Defaults to 10000.
-            output (bool): Whether to return the execution time and confidence interval or print it.
+            output (bool, optional): Whether to return the execution time (True) and confidence interval or print it (False). Defaults to False.
 
         Returns:
             list[float, (float, float)]: The average execution time of the evaluate method a 95% bootstrap confidence interval.
