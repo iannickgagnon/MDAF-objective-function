@@ -10,7 +10,7 @@ from numbers import Number
 import matplotlib.pyplot as plt
 from autograd import grad, hessian
 from abc import ABC, abstractmethod
-from typing import Callable, Iterable 
+from typing import Callable, Iterable
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # Internal constants
@@ -80,14 +80,15 @@ class ObjectiveFunction(ABC):
 
         # Initialize shift
         self.shift: np.ndarray = np.zeros(self.dimensionality)
-        self.noise: Callable = None
+        self.noise_mean: float = 0.0
+        self.noise_variance: float = 0.0
 
         # Initialize the number of objective function evaluations
         self.nb_calls: int = 0
 
         # Compute the first and second derivatives of the objective function's evaluation method
-        self.first_derivative = grad(self.evaluate)
-        self.second_derivative = hessian(self.evaluate)
+        self.first_derivative = grad(self.__evaluate)
+        self.second_derivative = hessian(self.__evaluate)
 
 
     def validate_parameters(self, parameters: dict, default_parameters: dict):
@@ -142,7 +143,7 @@ class ObjectiveFunction(ABC):
                 print(f"\033[93mWARNING: The '{setting_name}' setting is not set. The default value of {default_value} is used.\033[0m")
                 self.__dict__[setting_name] = default_value
     
-    @count_calls
+
     @abstractmethod
     def evaluate(self, position: np.ndarray) -> float:
         """
@@ -156,7 +157,21 @@ class ObjectiveFunction(ABC):
         """
         pass
     
+
+    @count_calls
+    def __evaluate(self, position: np.ndarray) -> float:
+        """
+        Evaluates the objective function at the given position. Adds noise and shift if specified
+
+        Args:
+            solution (np.ndarray): The solution to evaluate.
+
+        Returns:
+            float: The objective function value at the given solution.
+        """
+        return self.evaluate(position - self.shift) + self.noise_mean + np.random.randn() * self.noise_variance
     
+
     def parallel_evaluate(self, positions: np.ndarray, max_workers: int = None) -> np.ndarray:
         """
         Evaluates multiple positions in parallel.
@@ -246,7 +261,7 @@ class ObjectiveFunction(ABC):
             x = np.linspace(plot_bounds[0][0], plot_bounds[0][1], resolution)
 
             # Vectorized evaluation of the objective function
-            Z = self.evaluate(x.reshape(-1, 1))  # Reshape for function evaluation, assuming 'evaluate' can handle an array
+            Z = self.__evaluate(x.reshape(-1, 1))  # Reshape for function evaluation, assuming 'evaluate' can handle an array
 
             # Draw the line plot
             ax.plot(x, Z, label=f'Objective Function along X{dimensions[0]}')
@@ -271,7 +286,7 @@ class ObjectiveFunction(ABC):
 
             # Vectorized evaluation of the objective function
             positions = np.vstack([X.ravel(), Y.ravel()]).T
-            Z = np.array([self.evaluate(position) for position in positions]).reshape(X.shape)
+            Z = np.array([self.__evaluate(position) for position in positions]).reshape(X.shape)
 
             # Draw the contour plot with level curves
             levels = np.linspace(np.min(Z), np.max(Z), num=min(resolution // 10, 10))
@@ -309,7 +324,7 @@ class ObjectiveFunction(ABC):
                         return
 
                     # Create a sphere marker on the 3D plot for a left-click
-                    axs[1].scatter(x, y, self.evaluate(np.array([x, y])), color='red', marker='o', s=100)
+                    axs[1].scatter(x, y, self.__evaluate(np.array([x, y])), color='red', marker='o', s=100)
 
                 if event.button == RIGHT_CLICK:
                     
@@ -411,33 +426,27 @@ class ObjectiveFunction(ABC):
         if self.optimal_solution_position is not None:
             self.optimal_solution_position += shift
 
-        # Copy the original evaluate method
-        evaluate_copy = deepcopy(self.evaluate)
-
-        # Define a new evaluate method that shifts the position before evaluating
-        def shifted_evaluate(position: np.ndarray) -> np.ndarray:
-            return evaluate_copy(position - shift)
-        
         # Store the shift vector
         self.shift = shift
-
-        # Replace the original evaluate method with the shifted one
-        self.evaluate = shifted_evaluate
     
     
-    def apply_noise(self, noisy_foo: Callable) -> None:
+    def apply_noise(self, mean: float, variance: float) -> None:
+        """
+        Applies Gaussian noise to the objective function.
 
-         # Copy the original evaluate method
-        evaluate_copy = deepcopy(self.evaluate)
+        Args:
+            mean (float): The mean of the Gaussian noise.
+            variance (float): The variance of the Gaussian noise.
 
-        # Define a new evaluate method that shifts the position before evaluating
-        def noisy_evaluate(position: np.ndarray) -> np.ndarray:
-            return evaluate_copy(position) + noisy_foo()
-        
-        # Replace the original evaluate method with the shifted one
-        self.evaluate = noisy_evaluate
+        Returns:
+            Nothing
+        """
+       
+        # Store the noise parameters
+        self.noise_mean = mean
+        self.noise_variance = variance
 
-
+    
     def save(self, path: str) -> None:
         """
         Saves the objective function to a file.
@@ -499,9 +508,50 @@ class ObjectiveFunction(ABC):
         Returns:
             str: The modified code string with docstrings removed.
         """
-
         code = re.sub(r'\"\"\".*?\"\"\"', '', code, flags=re.DOTALL)
         code = re.sub(r"'''.*?'''", '', code, flags=re.DOTALL)
+        return code
+
+
+    def __decouple_shift_noise(self, code: str) -> str:
+        """
+        Adds shift and noise to the decoupled evaluate method.        
+        
+        Args:
+            code (str): The decoupled evaluate method code.
+
+        Returns:
+            str: The modified code with shift and noise added.
+        """
+
+        if any(self.shift):
+
+            # Find the def statement
+            def_line = re.search('def.*\n', code)[0]
+
+            # Build shift expression 
+            shift_str = f'np.array({self.shift})'.replace(' ', ',')
+
+            # Add the shift right after the original def statement
+            code = code.replace(def_line, def_line + f'    position += {shift_str}\n')
+
+        if self.noise_mean or self.noise_variance:
+
+            # Find the return statement
+            return_line = re.search('return.*', code)
+
+            # Make sure the return statement exists
+            if not return_line:
+                raise ValueError("Could not find the return statement in the evaluate method.")
+
+            # Make a copy of the return line
+            return_line_copy = return_line[0]
+
+            # Remove the last line feed(s) and combine
+            new_return_line = return_line_copy.replace('\n', '') + f' + {self.noise_mean} + np.random.randn() * {self.noise_variance}'
+
+            # Replace the original return line with the modified one
+            code = code.replace(return_line_copy, new_return_line)
 
         return code
 
@@ -537,6 +587,9 @@ class ObjectiveFunction(ABC):
 
         # Remove references to self
         reassembled_code = self.__remove_self_references(reassembled_code)
+
+        # Account for shift and noise
+        reassembled_code = self.__decouple_shift_noise(reassembled_code)
 
         # Save the decoupled evaluate method to a file
         with open(DECOUPLED_FUNCTION_PATH, 'w') as file_write:

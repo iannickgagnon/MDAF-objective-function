@@ -28,14 +28,11 @@ if __name__ == "__main__":
     '''
 
     foo = Ackley()
-    #foo.apply_shift(np.array([1, 1]))
-    #foo.apply_noise(np.random.randn)
-
-    #foo.visualize()
-    #foo.apply_shift(np.array([1, 1]))
-    #foo.apply_noise(np.random.randn)
-    #print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
-    #foo.visualize()
+    foo.visualize()
+    print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
+    foo.apply_shift(np.array([5, 5]))
+    foo.apply_noise(0, 0.1)
+    foo.visualize()
     print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
 
     '''
