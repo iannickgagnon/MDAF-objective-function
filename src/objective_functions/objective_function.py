@@ -585,9 +585,15 @@ class ObjectiveFunction(ABC):
         return code
 
 
-    def __decouple_evaluate(self):
+    def __decouple_evaluate(self) -> None:
         """
         Decouples the evaluate method from the objective function instance.
+
+        Args:
+            None
+
+        Returns:
+            Nothing
         """
 
         # Get the cleartext code of the evaluate method
