@@ -28,6 +28,7 @@ if __name__ == "__main__":
     '''
 
     foo = Ackley()
+    foo.time()
     foo.visualize()
     print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
     foo.apply_shift(np.array([5, 5]))

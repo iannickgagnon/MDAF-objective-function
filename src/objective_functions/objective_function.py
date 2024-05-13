@@ -2,6 +2,7 @@
 # External libraries
 import os
 import re
+import timeit
 import pickle
 import inspect
 import numpy as np
@@ -171,6 +172,34 @@ class ObjectiveFunction(ABC):
         """
         return self.evaluate(position - self.shift) + self.noise_mean + np.random.randn() * self.noise_variance
     
+
+    def time(self, nb_runs: int = 10000, output=False) -> list[float, (float, float)]:
+        """
+        Measures the execution time of the evaluate method.
+
+        Args:
+            nb_runs (int): The number of times to run the evaluate method.
+            output (bool): Whether to return the execution time and confidence interval or print it.
+
+        Returns:
+            list[float, (float, float)]: The average execution time of the evaluate method a 95% bootstrap confidence interval.
+        """
+
+        # Calculate bootstrap confidence interval
+        bootstrap_times = np.array([timeit.timeit(lambda: self.evaluate(np.random.uniform(-5, 5, self.dimensionality)), number=1) for _ in range(nb_runs)])
+
+        # Calculate the average execution time
+        mean_time = np.mean(bootstrap_times)
+
+        # Calculate the 95% confidence interval
+        lower_bound = np.percentile(bootstrap_times, 2.5)
+        upper_bound = np.percentile(bootstrap_times, 97.5)
+
+        if output:
+            return [mean_time, (lower_bound, upper_bound)]
+        else:
+            print(f"Execution time (n={nb_runs}): {mean_time:.3e} 95% CI: ({lower_bound:.3e}, {upper_bound:.3e})")
+
 
     def parallel_evaluate(self, positions: np.ndarray, max_workers: int = None) -> np.ndarray:
         """
