@@ -464,6 +464,28 @@ class ObjectiveFunction(ABC):
             return obj
 
 
+    def __remove_self_references(self, code: str) -> str:
+        """
+        Removes self-references from the given code by replacing 'self.parameters['x']' with corresponding literal values.
+
+        Args:
+            code (str): The code string to remove self-references from.
+
+        Returns:
+            str: The modified code string with self-references removed.
+        """
+
+        # Find all the self-references in the code
+        match_expr = re.findall("self.parameters\[\s*'\s*.\s*'\s*\]", code)
+        match_para = re.findall("self.parameters\[\s*'\s*(.)\s*'\s*\]", code)
+
+        # Replace the self-references with the corresponding literal values
+        for para, expr in zip(match_para, match_expr):
+            code = code.replace(expr, str(self.parameters[para]))
+
+        return code
+
+
     def __decouple_evaluate(self):
         """
         Decouples the evaluate method from the objective function instance.
@@ -474,6 +496,10 @@ class ObjectiveFunction(ABC):
 
         # Remove docstrings
         cleartext_code = re.sub(r'\"\"\".*?\"\"\"', '', cleartext_code, flags=re.DOTALL)
+        cleartext_code = re.sub(r"'''.*?'''", '', cleartext_code, flags=re.DOTALL)
+        
+        # Remove self parameter
+        cleartext_code = re.sub(r'self,', '', cleartext_code)
 
         # Split the code into lines
         raw_lines = cleartext_code.split('\n')
@@ -491,7 +517,7 @@ class ObjectiveFunction(ABC):
         reassembled_code = '\n'.join(code_lines)
 
         # Remove references to self
-        reassembled_code = reassembled_code.replace('self,', '')
+        reassembled_code = self.__remove_self_references(reassembled_code)
 
         # Save the decoupled evaluate method to a file
         with open(DECOUPLED_FUNCTION_PATH, 'w') as file_write:
@@ -500,7 +526,7 @@ class ObjectiveFunction(ABC):
 
                 # Import all the libraries used in the objective_function.py file
                 for line in file_read.readlines():
-                    if 'def' in line:
+                    if 'def ' in line:
                         break
                     elif 'import' in line:
                         file_write.write(f'{line.strip()}\n')

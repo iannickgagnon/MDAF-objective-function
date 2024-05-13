@@ -27,11 +27,11 @@ if __name__ == "__main__":
     Rastrigin().visualize()  
     '''
 
-    foo = Sphere()
+    foo = Ackley()
     #foo.apply_shift(np.array([1, 1]))
     #foo.apply_noise(np.random.randn)
 
-    foo.visualize()
+    #foo.visualize()
     #foo.apply_shift(np.array([1, 1]))
     #foo.apply_noise(np.random.randn)
     #print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
