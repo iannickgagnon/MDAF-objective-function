@@ -28,7 +28,7 @@ if __name__ == "__main__":
     '''
 
     foo = Ackley()
-    foo.time())
+    foo.time()
 
     '''
     foo.visualize()

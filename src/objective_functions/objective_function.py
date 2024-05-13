@@ -198,7 +198,7 @@ class ObjectiveFunction(ABC):
         if output:
             return [mean_time, (lower_bound, upper_bound)]
         else:
-            print(f"Execution time (n={nb_runs}): {mean_time:.3e} 95% CI: ({lower_bound:.3e}, {upper_bound:.3e})")
+            print(f"Execution time (n={nb_runs}): {mean_time:.3e} 95% CI ({lower_bound:.3e}, {upper_bound:.3e})")
 
 
     def parallel_evaluate(self, positions: np.ndarray, max_workers: int = None) -> np.ndarray:
