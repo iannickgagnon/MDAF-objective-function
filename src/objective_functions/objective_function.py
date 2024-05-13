@@ -175,18 +175,18 @@ class ObjectiveFunction(ABC):
 
     def time(self, nb_runs: int = 10000, output=False) -> list[float, (float, float)]:
         """
-        Measures the execution time of the evaluate method.
+        Measures the execution time of the evaluate method and calculates a 95% bootstrap confidence interval.
 
         Args:
-            nb_runs (int): The number of times to run the evaluate method.
+            nb_runs (int, optional): The number of times to run the evaluate method. Defaults to 10000.
             output (bool): Whether to return the execution time and confidence interval or print it.
 
         Returns:
             list[float, (float, float)]: The average execution time of the evaluate method a 95% bootstrap confidence interval.
         """
-
+        
         # Calculate bootstrap confidence interval
-        bootstrap_times = np.array([timeit.timeit(lambda: self.evaluate(np.random.uniform(-5, 5, self.dimensionality)), number=1) for _ in range(nb_runs)])
+        bootstrap_times = np.array([timeit.timeit(lambda: self.evaluate(np.array([np.random.uniform(low, high) for low, high in self.search_space_bounds])), number=1) for _ in range(nb_runs)])
 
         # Calculate the average execution time
         mean_time = np.mean(bootstrap_times)

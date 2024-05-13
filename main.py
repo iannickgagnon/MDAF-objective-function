@@ -28,24 +28,13 @@ if __name__ == "__main__":
     '''
 
     foo = Ackley()
-    foo.time()
+    foo.time())
+
+    '''
     foo.visualize()
     print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
     foo.apply_shift(np.array([5, 5]))
     foo.apply_noise(0, 0.1)
     foo.visualize()
     print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
-
-    '''
-    import timeit
-    import numpy as np
-
-    # Measure the execution time of evaluate_a
-    time_a = timeit.timeit(lambda: ackley.evaluate(np.random.uniform(-5, 5, 2)), number=10000)
-
-    # Measure the execution time of evaluate_b
-    time_b = timeit.timeit(lambda: ackley.evaluate_b(np.random.uniform(-5, 5, 2)), number=10000)
-
-    print(f"Execution time of evaluate: {time_a} seconds")
-    print(f"Execution time of evaluate_b: {time_b} seconds")
     '''
