@@ -1,5 +1,3 @@
-[Contribution Guide](./test.md)
-
 ![](./doc/img/logo_top.png)
 ![](./doc/img/logo_bottom.png)
 
