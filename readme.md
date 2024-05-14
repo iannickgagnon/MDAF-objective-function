@@ -9,11 +9,23 @@ The `MDAF-objective-function` module  is a specialized tool designed to streamli
 
 ## Version
 
-This library uses calendar versioning (`MAJOR.YEAR.NUMBER`) for where : 
+This library uses calendar versioning (CalVer) (`MAJOR.YEAR.NUMBER`) where : 
 
 - `MAJOR`: This represents a major release.
 - `YEAR`: The year of the release.
 - `NUMBER`: The release number for the given year.
+
+Calendar versioning was preferred over semantic versioning (SemVer) to facilitate interpretation in journal articles.
+
+## How to cite
+
+- **APA Style**: Gagnon, I. (`YEAR`). Metaheuristics Design and Analysis Framework (MDAF), Version `MAJOR.YEAR.NUMBER` [Software]. Retrieved from https://github.com/iannickgagnon/MDAF-objective-function.
+
+- **MLA Style**: Gagnon, Iannick. Metaheuristics Design And Analysis Framework. Version `MAJOR.YEAR.NUMBER`. `YEAR`. Software. Accessed `DAY-MONTH-YEAR`. https://github.com/iannickgagnon/MDAF-objective-function.
+
+- **Chicago Style**: Gagnon, Iannick. `YEAR`. Metaheuristics Design And Analysis Framework (MDAF), Version `MAJOR.YEAR.NUMBER`. Software. https://github.com/iannickgagnon/MDAF-objective-function.
+
+Replace `YEAR` with the year of the version used, `MAJOR.YEAR.NUMBER` with the full version and `DAY-MONTH-YEAR` with the date you accessed the software online (i.e., the date at which you cloned the repo).
 
 ## Features
 
@@ -55,6 +67,6 @@ I have also greatly benefited from the following official cheat sheet from GitHu
 
 ## Contact
 
-**Please note that even though I am a teaching professor at the École de technologie supérieure in Montreal, Canada, I am not looking for prospective students. I sincerely appreciate your messages, but I cannot respond to them because of my other priorities.**
+**Please note that I am not looking for prospective students. I sincerely appreciate your messages, but I cannot respond to them because of other priorities.**
 
 While I cannot guarantee a timely response, I invite you to contact me if you have any comments : iannick.gagnon@etsmtl.ca. Also, feel free to add me on LinkedIn : https://www.linkedin.com/in/iannick-gagnon-3304311a6/.
