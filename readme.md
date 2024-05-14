@@ -15,6 +15,7 @@ The `MDAF-objective-function` module  is a specialized tool designed to streamli
 - **Shifting**: Apply shifts to evaluate robustness to positional bias (`objective_function.apply_shift()`).
 - **Rotating**: Apply rotations to evaluate robustness to linkage (`objective_function.apply_rotation()`).
 - **Noisy evaluation**: Apply noise to evaluate robustness to noisy environments (`objective_function.apply_noise()`).
+- **Timing**: Built-in timing for performance optimization and comparison (`objective_function.time()`).
 - **Visualization**: Dynamic visualization in 2D or 3D (`objective_function.visualize()`).
 
 ## Built-in objective functions
@@ -35,8 +36,17 @@ If you aren't familiar with git, you may wish to consult the following online e-
 
 * https://git-scm.com/book/en/v2 
 
-## Known limitations
+I have also greatly benefited from the following official cheat sheet from GitHub:
+* https://education.github.com/git-cheat-sheet-education.pdf
 
 ## Future work
 
+- **Multiple objectives**: Derive a `MultiobjectiveFunction` class from `ObjectiveFunction`.
+- **Profiling**: Built-in profiling for the `objective_function.evaluate()` method.
+- **Enhance timing**: Enable timing for the `objective_function.parallel_evaluate()` method.
+
 ## Contact
+
+**Please note that even though I am a teaching professor at the École de technologie supérieure in Montreal, Canada, I am not looking for prospective students. I sincerely appreciate your messages, but I cannot respond to them because of my other priorities.**
+
+While I cannot guarantee a timely response, I invite you to contact me if you have any comments : iannick.gagnon@etsmtl.ca. Also, feel free to add me on LinkedIn : https://www.linkedin.com/in/iannick-gagnon-3304311a6/.
