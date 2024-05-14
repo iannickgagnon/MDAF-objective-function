@@ -73,7 +73,7 @@ class ObjectiveFunction(ABC):
         
         # Validate the size of the optimal solution position
         if self.optimal_solution_position is not None and len(self.optimal_solution_position) != self.dimensionality:
-                raise ValueError("The size of the optimal solution position must match the dimensionality of the objective function.")
+                raise ValueError("The size of the optimal position must match the dimensionality.")
 
         # Validate the size of the search space bounds
         if len(self.search_space_bounds) != self.dimensionality:
@@ -92,34 +92,34 @@ class ObjectiveFunction(ABC):
         self.second_derivative = hessian(self.__evaluate)
 
 
-    def validate_parameters(self, parameters: dict, default_parameters: dict):
+    def validate_parameters(self, parameters: dict, default_params: dict):
         """
         Validates the parameters of the objective function.
 
         Args:
             parameters (dict): The parameters to validate.
-            default_parameters (dict): The default parameters of the objective function.
+            default_params (dict): The default parameters of the objective function.
 
         Returns:
             dict: The validated parameters.
         """
 
         # Check if the number of parameters exceeds the number of default parameters
-        if len(parameters) > len(default_parameters):
+        if len(parameters) > len(default_params):
             raise ValueError("The number of parameters exceeds the number of default parameters.")
 
         # Make sure that all the provided parameters are also in the default parameters
         for parameter_name in parameters:
-            if parameter_name not in default_parameters:
-                raise ValueError(f"'{parameter_name}' is not a valid parameter for this objective function. Valid parameters are {default_parameters.keys()}.")
+            if parameter_name not in default_params:
+                raise ValueError(f"'{parameter_name}' is not a valid parameter. Valid parameters are {default_params.keys()}.")
 
         # Store the parameters and set default values as required
-        for parameter_name in default_parameters:
+        for parameter_name in default_params:
             if parameter_name in parameters:
                 self.parameters[parameter_name] = parameters[parameter_name]
             else:
-                default_value = default_parameters[parameter_name]
-                print(f"\033[93mWARNING: The '{parameter_name}' parameter is not set. The default value of {default_value} is used.\033[0m")
+                default_value = default_params[parameter_name]
+                print(f"\033[93mWARNING: The '{parameter_name}' parameter is not set. Default value of {default_value} is used.\033[0m")
                 self.parameters[parameter_name] = default_value
        
 
@@ -179,14 +179,17 @@ class ObjectiveFunction(ABC):
 
         Args:
             nb_runs (int, optional): The number of times to run the evaluate method. Defaults to 10000.
-            output (bool, optional): Whether to return the execution time (True) and confidence interval or print it (False). Defaults to False.
+            output (bool, optional): Whether to return the execution time (True) and CI or print it (False). Defaults to False.
 
         Returns:
             list[float, (float, float)]: The average execution time of the evaluate method a 95% bootstrap confidence interval.
         """
-        
-        # Calculate bootstrap confidence interval
-        bootstrap_times = np.array([timeit.timeit(lambda: self.evaluate(np.array([np.random.uniform(low, high) for low, high in self.search_space_bounds])), number=1) for _ in range(nb_runs)])
+
+        # Wrap the function to evaluate
+        wrapper = lambda: self.evaluate(np.array([np.random.uniform(low, high) for low, high in self.search_space_bounds]))
+
+        # Generate the bootstrap sample
+        bootstrap_times = np.array([timeit.timeit(wrapper, number=1) for _ in range(nb_runs)])
 
         # Calculate the average execution time
         mean_time = np.mean(bootstrap_times)
@@ -290,7 +293,7 @@ class ObjectiveFunction(ABC):
             x = np.linspace(plot_bounds[0][0], plot_bounds[0][1], resolution)
 
             # Vectorized evaluation of the objective function
-            Z = self.__evaluate(x.reshape(-1, 1))  # Reshape for function evaluation, assuming 'evaluate' can handle an array
+            Z = self.__evaluate(x.reshape(-1, 1))
 
             # Draw the line plot
             ax.plot(x, Z, label=f'Objective Function along X{dimensions[0]}')
@@ -577,7 +580,8 @@ class ObjectiveFunction(ABC):
             return_line_copy = return_line[0]
 
             # Remove the last line feed(s) and combine
-            new_return_line = return_line_copy.replace('\n', '') + f' + {self.noise_mean} + np.random.randn() * {self.noise_variance}'
+            new_return_line = return_line_copy.replace('\n', '') + \
+                f' + {self.noise_mean} + np.random.randn() * {self.noise_variance}'
 
             # Replace the original return line with the modified one
             code = code.replace(return_line_copy, new_return_line)
