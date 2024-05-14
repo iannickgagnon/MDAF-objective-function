@@ -19,17 +19,17 @@ Calendar versioning was preferred over semantic versioning (SemVer) to facilitat
 
 ## How to cite
 
-- **APA Style**:
+**APA Style**:
 ```
 Gagnon, I. (YEAR). Metaheuristics Design and Analysis Framework (MDAF), Version MAJOR.YEAR.NUMBER [Software]. Retrieved from https://github.com/iannickgagnon/MDAF-objective-function.
 ```
 
-- **MLA Style**: 
+**MLA Style**: 
 ```
 Gagnon, Iannick. Metaheuristics Design And Analysis Framework. Version MAJOR.YEAR.NUMBER. YEAR. Software. Accessed DAY-MONTH-YEAR. https://github.com/iannickgagnon/MDAF-objective-function.
 ```
 
-- **Chicago Style**:
+**Chicago Style**:
 ```
 Gagnon, Iannick. YEAR. Metaheuristics Design And Analysis Framework (MDAF), Version MAJOR.YEAR.NUMBER. Software. https://github.com/iannickgagnon/MDAF-objective-function.
 ```
