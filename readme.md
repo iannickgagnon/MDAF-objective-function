@@ -7,6 +7,14 @@ The Metaheuristics Design And Analysis Framework (MDAF) is an open-source collec
 
 The `MDAF-objective-function` module  is a specialized tool designed to streamline the process of defining and evaluating objective functions. It offers a low-code template that simplifies the setup and execution of complex objective functions, allowing researchers to concentrate more on refining their algorithms and less on the intricacies of coding.
 
+## Version
+
+This library uses calendar versioning (`MAJOR.YEAR.NUMBER`) for where : 
+
+- `MAJOR`: This represents a major release.
+- `YEAR`: The year of the release.
+- `NUMBER`: The release number for the given year.
+
 ## Features
 
 - **Automated accounting**: The number times a function is evaluated is automatically incremented and stored (`objective_function.nb_calls`).
