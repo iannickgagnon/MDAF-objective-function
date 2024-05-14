@@ -6,7 +6,6 @@ import timeit
 import pickle
 import inspect
 import numpy as np
-from copy import deepcopy
 from numbers import Number
 import matplotlib.pyplot as plt
 from autograd import grad, hessian
