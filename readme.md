@@ -47,7 +47,21 @@ Replace `YEAR` with the year of the version used, `MAJOR.YEAR.NUMBER` with the f
 - **Timing**: Built-in timing for performance optimization and comparison (`objective_function.time()`).
 - **Visualization**: Dynamic visualization in 2D or 3D (`objective_function.visualize()`).
 
-## Installation
+## How to install
+
+Install Python's package manager if you don't have it already:
+
+* https://pip.pypa.io/en/stable/installation/
+
+Run the following command:
+
+```bash
+pip install MDAF-objective-function
+```
+
+Use the following command to install this library:
+
+## How to clone
 
 Install the open source git version control software if you don't have it already: 
 
