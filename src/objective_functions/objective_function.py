@@ -23,7 +23,7 @@ DECOUPLED_FUNCTION_PATH = './src/objective_functions/tmp/decoupled_evaluate.py'
 
 def count_calls(foo: Callable) -> Callable:
     """
-    Decorator that counts the number of calls to a method.
+    Decorator that increments and stores the number of calls to a method.
 
     Args:
         foo (Callable): The function to count the number of calls to.
@@ -509,7 +509,7 @@ class ObjectiveFunction(ABC):
 
     def __remove_self_references(self, code: str) -> str:
         """
-        Removes self-references from the given code by replacing 'self.parameters['x']' with corresponding literal values.
+        Removes self-references from the given code by replacing 'self.parameters['...']' with corresponding literal values.
 
         Args:
             code (str): The code string to remove self-references from.

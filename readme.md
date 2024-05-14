@@ -1,3 +1,5 @@
+[Contribution Guide](./test.md)
+
 ![](./doc/img/logo_top.png)
 ![](./doc/img/logo_bottom.png)
 
@@ -18,8 +20,6 @@ The `MDAF-objective-function` module  is a specialized tool designed to streamli
 - **Timing**: Built-in timing for performance optimization and comparison (`objective_function.time()`).
 - **Visualization**: Dynamic visualization in 2D or 3D (`objective_function.visualize()`).
 
-## Built-in objective functions
-
 ## Installation
 
 Install the open source git version control software if you don't have it already: 
@@ -38,6 +38,8 @@ If you aren't familiar with git, you may wish to consult the following online e-
 
 I have also greatly benefited from the following official cheat sheet from GitHub:
 * https://education.github.com/git-cheat-sheet-education.pdf
+
+## Built-in objective functions
 
 ## Future work
 
