@@ -19,11 +19,20 @@ Calendar versioning was preferred over semantic versioning (SemVer) to facilitat
 
 ## How to cite
 
-- **APA Style**: Gagnon, I. (`YEAR`). Metaheuristics Design and Analysis Framework (MDAF), Version `MAJOR.YEAR.NUMBER` [Software]. Retrieved from https://github.com/iannickgagnon/MDAF-objective-function.
+- **APA Style**:
+```
+Gagnon, I. (YEAR). Metaheuristics Design and Analysis Framework (MDAF), Version MAJOR.YEAR.NUMBER [Software]. Retrieved from https://github.com/iannickgagnon/MDAF-objective-function.
+```
 
-- **MLA Style**: Gagnon, Iannick. Metaheuristics Design And Analysis Framework. Version `MAJOR.YEAR.NUMBER`. `YEAR`. Software. Accessed `DAY-MONTH-YEAR`. https://github.com/iannickgagnon/MDAF-objective-function.
+- **MLA Style**: 
+```
+Gagnon, Iannick. Metaheuristics Design And Analysis Framework. Version MAJOR.YEAR.NUMBER. YEAR. Software. Accessed DAY-MONTH-YEAR. https://github.com/iannickgagnon/MDAF-objective-function.
+```
 
-- **Chicago Style**: Gagnon, Iannick. `YEAR`. Metaheuristics Design And Analysis Framework (MDAF), Version `MAJOR.YEAR.NUMBER`. Software. https://github.com/iannickgagnon/MDAF-objective-function.
+- **Chicago Style**:
+```
+Gagnon, Iannick. YEAR. Metaheuristics Design And Analysis Framework (MDAF), Version MAJOR.YEAR.NUMBER. Software. https://github.com/iannickgagnon/MDAF-objective-function.
+```
 
 Replace `YEAR` with the year of the version used, `MAJOR.YEAR.NUMBER` with the full version and `DAY-MONTH-YEAR` with the date you accessed the software online (i.e., the date at which you cloned the repo).
 
