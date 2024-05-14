@@ -41,7 +41,7 @@ I have also greatly benefited from the following official cheat sheet from GitHu
 
 ## Future work
 
-- **Multiple objectives**: Derive a `MultiobjectiveFunction` class from `ObjectiveFunction`.
+- **Multiple objectives**: Derive a `MultiobjectiveFunction` class from `ObjectiveFunction`. See issue #9 : https://github.com/iannickgagnon/MDAF-objective-function/issues/9.
 - **Profiling**: Built-in profiling for the `objective_function.evaluate()` method.
 - **Enhance timing**: Enable timing for the `objective_function.parallel_evaluate()` method.
 
