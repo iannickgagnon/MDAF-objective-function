@@ -648,6 +648,12 @@ class ObjectiveFunction(ABC):
     def __delete_decoupled_evaluate() -> None:
         """
         Deletes the decoupled evaluate method file.
+
+        Args:
+            None
+
+        Returns:
+            Nothing
         """
         if os.path.exists(DECOUPLED_FUNCTION_PATH):
             os.remove(DECOUPLED_FUNCTION_PATH)
