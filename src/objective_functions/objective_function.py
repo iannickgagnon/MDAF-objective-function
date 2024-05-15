@@ -461,13 +461,13 @@ class ObjectiveFunction(ABC):
         self.shift = shift
     
     
-    def apply_noise(self, mean: float, variance: float) -> None:
+    def apply_noise(self, mean: float = 0.0, variance: float = 0.1) -> None:
         """
         Applies Gaussian noise to the objective function.
 
         Args:
-            mean (float): The mean of the Gaussian noise.
-            variance (float): The variance of the Gaussian noise.
+            mean (float, optional): The mean of the Gaussian noise. Defaults to 0.0.
+            variance (float, optional): The variance of the Gaussian noise. Defaults to 0.1.
 
         Returns:
             Nothing

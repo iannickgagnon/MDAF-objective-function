@@ -12,6 +12,7 @@ from src.objective_functions.subclasses.michalewicz import Michalewicz
 from src.objective_functions.subclasses.styblinski_tang import StyblinskiTang
 from src.objective_functions.subclasses.bulkin6 import Bulkin6 
 from src.objective_functions.subclasses.dropwave import DropWave
+from src.objective_functions.subclasses.eggholder import Eggholder
 
 if __name__ == "__main__":
 
@@ -27,8 +28,9 @@ if __name__ == "__main__":
     Rastrigin().visualize()  
     '''
 
-    foo = Ackley()
-    foo.time()
+    foo = Eggholder()
+    foo.apply_noise(0, 1)
+    foo.visualize()
 
     '''
     foo.visualize()
