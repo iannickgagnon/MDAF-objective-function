@@ -13,6 +13,7 @@ from src.objective_functions.subclasses.styblinski_tang import StyblinskiTang
 from src.objective_functions.subclasses.bulkin6 import Bulkin6 
 from src.objective_functions.subclasses.dropwave import DropWave
 from src.objective_functions.subclasses.eggholder import Eggholder
+from src.objective_functions.subclasses.gramacy_and_lee import GramacyAndLee
 
 if __name__ == "__main__":
 
@@ -28,12 +29,14 @@ if __name__ == "__main__":
     Rastrigin().visualize()  
     '''
 
-    foo = Eggholder()
-    foo.apply_noise(0, 1)
+    foo = GramacyAndLee()
+    foo.apply_noise(0, 0.5)
+    foo.apply_shift(np.array([-2]))
     foo.visualize()
+    print(foo.nb_calls)
 
     '''
-    foo.visualize()
+    foo.visualize() 
     print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
     foo.apply_shift(np.array([5, 5]))
     foo.apply_noise(0, 0.1)

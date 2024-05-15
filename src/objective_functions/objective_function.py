@@ -62,7 +62,7 @@ def constructor(foo: Callable):
         super(self.__class__, self).__init__(**kwargs)
 
     return wrapper
-
+  
 
 class ObjectiveFunction(ABC):
 
@@ -169,7 +169,7 @@ class ObjectiveFunction(ABC):
         Returns:
             float: The objective function value at the given solution.
         """
-        return self.evaluate(position - self.shift) + self.noise_mean + np.random.randn() * self.noise_variance
+        return self.evaluate(position - self.shift) + self.noise_mean + np.random.randn(position.shape[0]) * self.noise_variance
     
 
     def time(self, nb_runs: int = 10000, output=False) -> list[float, (float, float)]:
@@ -275,7 +275,7 @@ class ObjectiveFunction(ABC):
         """
         
         if len(dimensions) not in (1, 2):
-            raise ValueError("The number of dimensions to visualize must be 2 or 3.")
+            raise ValueError("The number of dimensions to visualize must be 1 or 2.")
         
         # Adjust the plot bounds
         if plot_bounds and len(plot_bounds) != len(dimensions):
@@ -283,7 +283,7 @@ class ObjectiveFunction(ABC):
         else:
             plot_bounds = self.search_space_bounds
         
-        if len(dimensions) == 1:
+        if self.dimensionality == 1 or len(dimensions) == 1:  
 
             # Create the figure and axis
             fig, ax = plt.subplots(figsize=(8, 6))
@@ -292,13 +292,14 @@ class ObjectiveFunction(ABC):
             x = np.linspace(plot_bounds[0][0], plot_bounds[0][1], resolution)
 
             # Vectorized evaluation of the objective function
-            Z = self.__evaluate(x.reshape(-1, 1))
+            y = self.__evaluate(x)
 
             # Draw the line plot
-            ax.plot(x, Z, label=f'Objective Function along X{dimensions[0]}')
+            ax.plot(x, y, label=f'Objective Function along X{dimensions[0]}')
             ax.set_xlabel(f'X{dimensions[0]}')
             ax.set_ylabel('Fitness')
             ax.set_title('1D Visualization of Objective Function')
+            ax.grid(True, linestyle='--', alpha=0.5)
             ax.legend()
 
             plt.show()
