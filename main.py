@@ -14,6 +14,7 @@ from src.objective_functions.subclasses.bulkin6 import Bulkin6
 from src.objective_functions.subclasses.dropwave import DropWave
 from src.objective_functions.subclasses.eggholder import Eggholder
 from src.objective_functions.subclasses.gramacy_and_lee import GramacyAndLee
+from src.objective_functions.subclasses.holder_table import HolderTable
 
 if __name__ == "__main__":
 
@@ -29,10 +30,10 @@ if __name__ == "__main__":
     Rastrigin().visualize()  
     '''
 
-    foo = GramacyAndLee()
+    foo = HolderTable()
     foo.apply_noise(0, 0.5)
-    foo.apply_shift(np.array([-2]))
-    foo.visualize()
+    foo.apply_shift(np.array([1, 1]))
+    foo.visualize(resolution=2000)
     print(foo.nb_calls)
 
     '''

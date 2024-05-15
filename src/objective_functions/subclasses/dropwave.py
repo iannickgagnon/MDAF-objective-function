@@ -31,7 +31,11 @@ class DropWave(of.ObjectiveFunction):
         Returns:
             float: The Dropwave function value at the given position.
         """
-        x, y = position
+
+        x = position[:, 0]
+        y = position[:, 1]
+        
         numerator = 1 + np.cos(12 * np.sqrt(x**2 + y**2))
         denominator = 0.5 * (x**2 + y**2) + 2
+        
         return -numerator / denominator

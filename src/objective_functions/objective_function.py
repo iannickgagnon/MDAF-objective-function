@@ -318,7 +318,8 @@ class ObjectiveFunction(ABC):
 
             # Vectorized evaluation of the objective function
             positions = np.vstack([X.ravel(), Y.ravel()]).T
-            Z = np.array([self.__evaluate(position) for position in positions]).reshape(X.shape)
+
+            Z = np.array([self.__evaluate(position.reshape(1, -1)) for position in positions]).reshape(X.shape)
 
             # Draw the contour plot with level curves
             levels = np.linspace(np.min(Z), np.max(Z), num=min(resolution // 10, 10))
