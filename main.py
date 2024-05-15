@@ -15,6 +15,8 @@ from src.objective_functions.subclasses.dropwave import DropWave
 from src.objective_functions.subclasses.eggholder import Eggholder
 from src.objective_functions.subclasses.gramacy_and_lee import GramacyAndLee
 from src.objective_functions.subclasses.holder_table import HolderTable
+from src.objective_functions.subclasses.franke import Franke
+#from src.objective_functions.subclasses.six_hump_camel_back import SixHumpCamelBack
 
 if __name__ == "__main__":
 
@@ -30,10 +32,10 @@ if __name__ == "__main__":
     Rastrigin().visualize()  
     '''
 
-    foo = HolderTable()
-    foo.apply_noise(0, 0.5)
-    foo.apply_shift(np.array([1, 1]))
-    foo.visualize(resolution=2000)
+    foo = Franke()
+    #foo.apply_noise(0, 0.5)
+    #foo.apply_shift(np.array([0, 0]))
+    foo.visualize()
     print(foo.nb_calls)
 
     '''

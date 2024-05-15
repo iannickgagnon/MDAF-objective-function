@@ -357,7 +357,7 @@ class ObjectiveFunction(ABC):
                         return
 
                     # Create a sphere marker on the 3D plot for a left-click
-                    axs[1].scatter(x, y, self.__evaluate(np.array([x, y])), color='red', marker='o', s=100)
+                    axs[1].scatter(x, y, self.__evaluate(np.array([[x, y]])), color='red', marker='o', s=100)
 
                 if event.button == RIGHT_CLICK:
                     
