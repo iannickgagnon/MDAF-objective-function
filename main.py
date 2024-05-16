@@ -32,7 +32,9 @@ if __name__ == "__main__":
     Rastrigin().visualize()  
     '''
 
-    foo = StyblinskiTang().visualize()
+    foo = Sphere()
+    print(foo(foo.optimal_solution_position))
+
     #foo.apply_noise(0, 0.5)
     #foo.apply_shift(np.array([0, 0]))
     #foo.visualize()

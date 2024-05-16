@@ -659,3 +659,15 @@ class ObjectiveFunction(ABC):
         """
         if os.path.exists(DECOUPLED_FUNCTION_PATH):
             os.remove(DECOUPLED_FUNCTION_PATH)
+
+    def __call__(self, position: np.ndarray) -> float:
+        """
+        Evaluates the objective function at the given position.
+
+        Args:
+            position (np.ndarray): The position at which to evaluate the objective function.
+
+        Returns:
+            float: The value of the objective function at the given position.
+        """
+        return self.evaluate(position)
