@@ -17,22 +17,11 @@ from src.objective_functions.subclasses.gramacy_and_lee import GramacyAndLee
 from src.objective_functions.subclasses.holder_table import HolderTable
 from src.objective_functions.subclasses.franke import Franke
 from src.objective_functions.subclasses.six_hump_camel_back import SixHumpCamelBack
+from src.objective_functions.subclasses.langermann import Langermann
 
 if __name__ == "__main__":
 
-    '''
-    Ackley().visualize()
-    Griewank().visualize()
-    Michalewicz().visualize()
-    StyblinskiTang().visualize()
-    Bulkin6().visualize()
-    DropWave().visualize()
-    Sphere().visualize()
-    Rosenbrock().visualize()  
-    Rastrigin().visualize()  
-    '''
-
-    foo = SixHumpCamelBack().visualize()
+    foo = Langermann().visualize()
 
     #foo.apply_noise(0, 0.5)
     #foo.apply_shift(np.array([0, 0]))
