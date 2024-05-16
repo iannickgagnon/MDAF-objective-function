@@ -18,18 +18,20 @@ from src.objective_functions.subclasses.holder_table import HolderTable
 from src.objective_functions.subclasses.franke import Franke
 from src.objective_functions.subclasses.six_hump_camel_back import SixHumpCamelBack
 from src.objective_functions.subclasses.langermann import Langermann
+from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    foo = Langermann().visualize()
+    foo = Levy().visualize()
+
 
     #foo.apply_noise(0, 0.5)
     #foo.apply_shift(np.array([0, 0]))
     #foo.visualize()
     #print(foo.nb_calls)
-
     #print(foo.evaluate(np.array([[1, 1]])))
     #print(foo.evaluate(np.array([[0.47, 0.8]])))
+
 
     '''
     foo.visualize() 
@@ -40,10 +42,13 @@ if __name__ == "__main__":
     print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
     '''
 
+
     '''
     from scipy.optimize import minimize
-    bounds = [(0, 1), (0, 1)]
-    result = minimize(foo.evaluate, x0=[0.5, 0.5], bounds=bounds)
+    
+    foo = Langermann()
+    bounds = [(0, 10), (0, 10)]
+    result = minimize(foo.evaluate, x0=[1, 10], bounds=bounds)
 
     # Print the minimum value and the corresponding x and y
     print(f"Minimum value: {result.fun}")

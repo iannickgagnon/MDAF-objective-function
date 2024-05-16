@@ -10,7 +10,10 @@ DEFAULT_PARAMETERS = {'A': 10, 'B': 0.2, 'C': np.pi}
 
 DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
                                    optimal_solution=-19.2085,
-                                   optimal_solution_position=np.array([8.05502, 9.66459]),
+                                   optimal_solution_position=[np.array([8.05502, 9.66459]),
+                                                              np.array([-8.05502, -9.66459]),
+                                                              np.array([8.05502, -9.66459]),
+                                                              np.array([-8.05502, 9.66459])],
                                    search_space_bounds=np.array([[-10, 10], [-10, 10]]))
 
 

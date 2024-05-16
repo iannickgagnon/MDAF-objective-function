@@ -49,3 +49,6 @@ class Ackley(of.ObjectiveFunction):
         
         return term1 + term2 + A + np.exp(1)
     
+
+if __name__ == '__main__':
+    Ackley().visualize()

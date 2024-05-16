@@ -8,7 +8,8 @@ from ..default_settings import DefaultSettings
 
 DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
                                    optimal_solution=-1.0316,
-                                   optimal_solution_position=np.array([[0.0898, -0.7126], [-0.0898, 0.7126]]),
+                                   optimal_solution_position=[np.array([0.0898, -0.7126]),
+                                                              np.array([-0.0898, 0.7126])],
                                    search_space_bounds=np.array([(-5, 5), (-5, 5)]))
 
 
