@@ -327,7 +327,6 @@ class ObjectiveFunction(ABC):
             axs[0].contour(cs, colors='k', linewidths=1.0)
             axs[0].set_xlabel(f"X{dimensions[0]}")
             axs[0].set_ylabel(f"X{dimensions[1]}")
-            axs[0].set_title("2D Contour Plot")
 
             # Show the optimal solution on the contour plot
             if self.optimal_solution_position is not None:
@@ -377,7 +376,6 @@ class ObjectiveFunction(ABC):
             axs[1].set_xlabel(f"X{dimensions[0]}")
             axs[1].set_ylabel(f"X{dimensions[1]}")
             axs[1].set_zlabel(f"f(X{dimensions[0]}, X{dimensions[1]})")
-            axs[1].set_title("Surface Plot")
      
             # Show the optimal solution on the surface plot
             if self.optimal_solution_position is not None:
