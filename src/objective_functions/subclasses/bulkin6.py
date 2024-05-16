@@ -31,4 +31,11 @@ class Bulkin6(of.ObjectiveFunction):
         Returns:
             float: The Bulkin no. 6 function value at the given position.
         """
-        return 100 * np.sqrt(np.abs(position[1] - 0.01 * position[0]**2)) + 0.01 * np.abs(position[0] + 10)
+
+        if position.ndim == 1:
+            position = position.reshape(1, -1)
+
+        x = position[:, 0]
+        y = position[:, 1]
+
+        return 100 * np.sqrt(np.abs(y - 0.01 * x**2)) + 0.01 * np.abs(x + 10)

@@ -32,11 +32,14 @@ if __name__ == "__main__":
     Rastrigin().visualize()  
     '''
 
-    foo = Franke()
+    foo = StyblinskiTang().visualize()
     #foo.apply_noise(0, 0.5)
     #foo.apply_shift(np.array([0, 0]))
-    foo.visualize()
-    print(foo.nb_calls)
+    #foo.visualize()
+    #print(foo.nb_calls)
+
+    #print(foo.evaluate(np.array([[1, 1]])))
+    #print(foo.evaluate(np.array([[0.47, 0.8]])))
 
     '''
     foo.visualize() 
@@ -45,4 +48,14 @@ if __name__ == "__main__":
     foo.apply_noise(0, 0.1)
     foo.visualize()
     print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
+    '''
+
+    '''
+    from scipy.optimize import minimize
+    bounds = [(0, 1), (0, 1)]
+    result = minimize(foo.evaluate, x0=[0.5, 0.5], bounds=bounds)
+
+    # Print the minimum value and the corresponding x and y
+    print(f"Minimum value: {result.fun}")
+    print(f"At position: {result.x}")
     '''

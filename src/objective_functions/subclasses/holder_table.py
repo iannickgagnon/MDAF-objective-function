@@ -38,6 +38,9 @@ class HolderTable(of.ObjectiveFunction):
             float: The Holder Table function value at the given position.
         """
 
+        if position.ndim == 1:
+            position = position.reshape(1, -1)
+
         x = position[:, 0]
         y = position[:, 1]
 

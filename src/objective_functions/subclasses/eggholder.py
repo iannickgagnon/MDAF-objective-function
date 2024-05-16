@@ -33,8 +33,11 @@ class Eggholder(of.ObjectiveFunction):
             float: The Eggholder function value at the given position.
         """
 
-        x1 = position[0]
-        x2 = position[1]
+        if position.ndim == 1:
+            position = position.reshape(1, -1)
+
+        x1 = position[:, 0]
+        x2 = position[:, 1]
 
         term1 = -(x2 + 47) * np.sin(np.sqrt(np.abs(x1 / 2 + (x2 + 47))))
         term2 = -x1 * np.sin(np.sqrt(np.abs(x1 - (x2 + 47))))

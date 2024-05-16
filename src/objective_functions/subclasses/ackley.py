@@ -46,5 +46,6 @@ class Ackley(of.ObjectiveFunction):
         
         term1 = -A * np.exp(-B * np.sqrt(np.sum(position**2) / n))
         term2 = -np.exp(np.sum(np.cos(C * position)) / n)
+        
         return term1 + term2 + A + np.exp(1)
     

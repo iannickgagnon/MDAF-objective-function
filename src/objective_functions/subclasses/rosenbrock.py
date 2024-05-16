@@ -31,5 +31,12 @@ class Rosenbrock(of.ObjectiveFunction):
         Returns:
             float: The Rosenbrock function value at the given position.
         """
-        return (1 - position[0]) ** 2 + 100 * (position[1] - position[0] ** 2) ** 2
+
+        if position.ndim == 1:
+            position = position.reshape(1, -1)
+
+        x = position[:, 0]
+        y = position[:, 1]
+
+        return (1 - x) ** 2 + 100 * (y - y ** 2) ** 2
     

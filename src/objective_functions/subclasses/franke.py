@@ -7,8 +7,8 @@ from .. import objective_function as of
 from ..default_settings import DefaultSettings
 
 DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
-                                   optimal_solution=0.0,
-                                   optimal_solution_position=np.zeros(2),
+                                   optimal_solution=0.03586959238610449,
+                                   optimal_solution_position=np.ones(2),
                                    search_space_bounds=np.array([(0, 1), (0, 1)]))
 
 
@@ -31,7 +31,10 @@ class Franke(of.ObjectiveFunction):
         Returns:
             float: The Franke's function value at the given position.
         """
-        
+
+        if position.ndim == 1:
+            position = position.reshape(1, -1)
+
         x = position[:, 0]
         y = position[:, 1]
 
