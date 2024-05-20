@@ -22,10 +22,15 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
+    DropWave().visualize()  
+    
+    '''
     foo = DropWave()
-    #foo.profile(nb_calls=750000)
-    foo.profile(nb_calls=100, nb_positions=int(1e6), filename='profile.txt')
-
+    foo.profile(nb_calls=100, 
+                nb_positions=int(1e6), 
+                filename='profile.txt')
+    '''
+                
     #foo.apply_noise(0, 0.5)
     #foo.apply_shift(np.array([0, 0]))
     #foo.visualize()
