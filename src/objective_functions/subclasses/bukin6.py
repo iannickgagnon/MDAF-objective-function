@@ -12,7 +12,7 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2,
                                    search_space_bounds = np.array([(-15, -5), (-3, 3)]))
 
 
-class Bulkin6(of.ObjectiveFunction):
+class Bukin6(of.ObjectiveFunction):
 
     @of.constructor
     def __init__(self,

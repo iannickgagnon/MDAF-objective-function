@@ -10,7 +10,7 @@ from src.objective_functions.subclasses.ackley import Ackley
 from src.objective_functions.subclasses.griewank import Griewank
 from src.objective_functions.subclasses.michalewicz import Michalewicz
 from src.objective_functions.subclasses.styblinski_tang import StyblinskiTang
-from src.objective_functions.subclasses.bulkin6 import Bulkin6 
+from objective_functions.subclasses.bukin6 import Bukin6 
 from src.objective_functions.subclasses.dropwave import DropWave
 from src.objective_functions.subclasses.eggholder import Eggholder
 from src.objective_functions.subclasses.gramacy_and_lee import GramacyAndLee
@@ -22,7 +22,7 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    foo = Sphere().visualize()
+    foo = Bukin6().visualize()
 
 
     #foo.apply_noise(0, 0.5)
