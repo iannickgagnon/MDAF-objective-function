@@ -41,6 +41,7 @@ Replace `YEAR` with the year of the version used, `MAJOR.YEAR.NUMBER` with the f
 - **Automated accounting**: The number times a function is evaluated is automatically incremented and stored (`objective_function.nb_calls`).
 - **Automatic differentiation**: Built-in numerical first- and second-order differentiation (`objective_function.compute_first_derivative()` and `objective_function.compute_second_derivative()`).
 - **Parallel evaluation**: Built-in support for parallel evaluation (`objective_function.parallel_evaluate()`).
+- **Profiling**: Built-in profiling of the objective function's caller function (`objective_function.profile_evaluate()`).
 - **Shifting**: Apply shifts to evaluate robustness to positional bias (`objective_function.apply_shift()`).
 - **Rotating**: Apply rotations to evaluate robustness to linkage (`objective_function.apply_rotation()`).
 - **Noisy evaluation**: Apply noise to evaluate robustness to noisy environments (`objective_function.apply_noise()`).
@@ -85,7 +86,6 @@ I have also greatly benefited from the following official cheat sheet from GitHu
 ## Future work
 
 - **Multiple objectives**: Derive a `MultiobjectiveFunction` class from `ObjectiveFunction`. See Issue https://github.com/iannickgagnon/MDAF-objective-function/issues/9.
-- **Profiling**: Built-in profiling for the `objective_function.evaluate()` method. See Issue https://github.com/iannickgagnon/MDAF-objective-function/issues/10.
 - **Enhance timing**: Enable timing for the `objective_function.parallel_evaluate()` method. See Issue https://github.com/iannickgagnon/MDAF-objective-function/issues/11.
 
 ## Contact
