@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from autograd import grad, hessian
 from abc import ABC, abstractmethod
 from typing import Callable, Iterable
+from line_profiler import LineProfiler
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # Internal constants
@@ -669,3 +670,35 @@ class ObjectiveFunction(ABC):
             float: The value of the objective function at the given position.
         """
         return self.evaluate(position)
+    
+    def profile_evaluate(self, nb_calls: int = 10000, line_by_line: bool = False) -> None:
+        """
+        Profiles the ObjectiveFunction.evaluate method.
+
+        Args:
+            nb_calls (int): The number of times to call the evaluate method.
+
+        Returns:
+            Nothing
+        """
+
+        # Generate random positions to evaluate
+        position = np.array([np.array([np.random.uniform(low, high) for low, high in self.search_space_bounds]) for _ in range(nb_calls)])
+        
+        # Wrap the evaluate method
+        def evaluate_wrapper():
+            for i in range(100):
+                self.evaluate(position)
+
+        print('\n\033[92mLine-by-line profiling of the evaluate method:\n\033[0m')
+
+        # Create an instance of LineProfiler and add the evaluate method to it
+        profiler = LineProfiler()
+        profiler.add_function(self.evaluate)
+
+        # Run the profiler on the wrapped method
+        profiler_wrapper = profiler(evaluate_wrapper)
+        profiler_wrapper()
+
+        # Print the results
+        profiler.print_stats()

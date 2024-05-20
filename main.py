@@ -22,8 +22,9 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    foo = Bukin6().visualize()
-
+    foo = DropWave()
+    #foo.profile_evaluate(nb_calls=750000)
+    foo.profile_evaluate(nb_calls=int(1e6))
 
     #foo.apply_noise(0, 0.5)
     #foo.apply_shift(np.array([0, 0]))
