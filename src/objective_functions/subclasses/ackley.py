@@ -6,7 +6,7 @@ import numpy as np
 from .. import objective_function as of
 from ..default_settings import DefaultSettings
 
-DEFAULT_PARAMETERS = {'a': 10, 'b': 0.2, 'c': 2 * np.pi}
+DEFAULT_PARAMETERS = {'A': 10, 'B': 0.2, 'C': 2 * np.pi}
 
 DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2, 
                                    optimal_solution = 0.0, 
@@ -40,9 +40,9 @@ class Ackley(of.ObjectiveFunction):
         
         n = len(position)
         
-        A = self.parameters['a']
-        B = self.parameters['b']
-        C = self.parameters['c']
+        A = self.parameters['A']
+        B = self.parameters['B']
+        C = self.parameters['C']
         
         term1 = -A * np.exp(-B * np.sqrt(np.sum(position**2) / n))
         term2 = -np.exp(np.sum(np.cos(C * position)) / n)

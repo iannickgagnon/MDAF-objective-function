@@ -9,7 +9,7 @@ from ..default_settings import DefaultSettings
 DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2, 
                                    optimal_solution = 0.0, 
                                    optimal_solution_position = np.array([-10, 1]), 
-                                   search_space_bounds = np.array([(-15, -5), (-3, 3)]))
+                                   search_space_bounds = np.array([(-15, 5), (-3, 3)]))
 
 
 class Bukin6(of.ObjectiveFunction):
