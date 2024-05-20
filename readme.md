@@ -38,14 +38,15 @@ Replace `YEAR` with the year of the version used, `MAJOR.YEAR.NUMBER` with the f
 
 ## Features
 
-- **Automated accounting**: The number times a function is evaluated is automatically incremented and stored (`objective_function.nb_calls`).
-- **Automatic differentiation**: Built-in numerical first- and second-order differentiation (`objective_function.compute_first_derivative()` and `objective_function.compute_second_derivative()`).
-- **Parallel evaluation**: Built-in support for parallel evaluation (`objective_function.parallel_evaluate()`).
-- **Shifting**: Apply shifts to evaluate robustness to positional bias (`objective_function.apply_shift()`).
-- **Rotating**: Apply rotations to evaluate robustness to linkage (`objective_function.apply_rotation()`).
-- **Noisy evaluation**: Apply noise to evaluate robustness to noisy environments (`objective_function.apply_noise()`).
-- **Timing**: Built-in timing for performance optimization and comparison (`objective_function.time()`).
-- **Visualization**: Dynamic visualization in 2D or 3D (`objective_function.visualize()`).
+- **Automated accounting**: The number times a function is evaluated is automatically incremented and stored (`ObjectiveFunction.nb_calls`).
+- **Automatic differentiation**: Built-in numerical first- and second-order differentiation (`ObjectiveFunction.compute_first_derivative()` and `ObjectiveFunction.compute_second_derivative()`).
+- **Parallel evaluation**: Built-in support for parallel evaluation (`ObjectiveFunction.parallel_evaluate()`).
+- **Profiling**: Built-in profiling of the objective function's caller function (`ObjectiveFunction.profile()`).
+- **Shifting**: Apply shifts to evaluate robustness to positional bias (`ObjectiveFunction.apply_shift()`).
+- **Rotating**: Apply rotations to evaluate robustness to linkage (`ObjectiveFunction.apply_rotation()`).
+- **Noisy evaluation**: Apply noise to evaluate robustness to noisy environments (`ObjectiveFunction.apply_noise()`).
+- **Timing**: Built-in timing for performance optimization and comparison (`ObjectiveFunction.time()`).
+- **Visualization**: Dynamic visualization in 2D or 3D (`ObjectiveFunction.visualize()`).
 
 ## How to install
 
@@ -85,8 +86,7 @@ I have also greatly benefited from the following official cheat sheet from GitHu
 ## Future work
 
 - **Multiple objectives**: Derive a `MultiobjectiveFunction` class from `ObjectiveFunction`. See Issue https://github.com/iannickgagnon/MDAF-objective-function/issues/9.
-- **Profiling**: Built-in profiling for the `objective_function.evaluate()` method. See Issue https://github.com/iannickgagnon/MDAF-objective-function/issues/10.
-- **Enhance timing**: Enable timing for the `objective_function.parallel_evaluate()` method. See Issue https://github.com/iannickgagnon/MDAF-objective-function/issues/11.
+- **Enhance timing**: Enable timing for the `ObjectiveFunction.parallel_evaluate()` method. See Issue https://github.com/iannickgagnon/MDAF-objective-function/issues/11.
 
 ## Contact
 
