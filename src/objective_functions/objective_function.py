@@ -671,7 +671,7 @@ class ObjectiveFunction(ABC):
         """
         return self.evaluate(position)
     
-    def profile_evaluate(self, nb_calls: int = 100, nb_positions: int = 10000) -> None:
+    def profile(self, nb_calls: int = 100, nb_positions: int = 10000) -> None:
         """
         Profiles the ObjectiveFunction.evaluate method.
 
