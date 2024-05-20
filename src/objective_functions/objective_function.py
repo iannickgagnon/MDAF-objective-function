@@ -671,7 +671,7 @@ class ObjectiveFunction(ABC):
         """
         return self.evaluate(position)
     
-    def profile(self, nb_calls: int = 100, nb_positions: int = 10000) -> None:
+    def profile(self, nb_calls: int = 100, nb_positions: int = 10000, filename: str = '') -> None:
         """
         Profiles the ObjectiveFunction.evaluate method.
 
@@ -704,3 +704,8 @@ class ObjectiveFunction(ABC):
 
         # Print the results
         profiler.print_stats()
+
+        # Print the results to a file
+        if filename:
+            with open(filename, 'w') as file:
+                profiler.print_stats(file)
