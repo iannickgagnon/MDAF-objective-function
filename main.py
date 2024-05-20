@@ -22,7 +22,7 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    foo = Rosenbrock().visualize()
+    foo = Sphere().visualize()
 
 
     #foo.apply_noise(0, 0.5)
