@@ -671,25 +671,27 @@ class ObjectiveFunction(ABC):
         """
         return self.evaluate(position)
     
-    def profile_evaluate(self, nb_calls: int = 10000, line_by_line: bool = False) -> None:
+    def profile_evaluate(self, nb_calls: int = 100, nb_positions: int = 10000) -> None:
         """
         Profiles the ObjectiveFunction.evaluate method.
 
         Args:
-            nb_calls (int): The number of times to call the evaluate method.
-
+            nb_calls (int, optional): The number of times to call the evaluate method. Defaults to 100.
+            nb_positions (int, optional): The number of positions to evaluate at each call. Defaults to 10E4.
+            
         Returns:
             Nothing
         """
 
         # Generate random positions to evaluate
-        position = np.array([np.array([np.random.uniform(low, high) for low, high in self.search_space_bounds]) for _ in range(nb_calls)])
+        position = np.array([np.array([np.random.uniform(low, high) for low, high in self.search_space_bounds]) for _ in range(nb_positions)])
         
         # Wrap the evaluate method
         def evaluate_wrapper():
-            for i in range(100):
+            for i in range(nb_calls):
                 self.evaluate(position)
 
+        # Print the profiling message
         print('\n\033[92mLine-by-line profiling of the evaluate method:\n\033[0m')
 
         # Create an instance of LineProfiler and add the evaluate method to it
