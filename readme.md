@@ -41,7 +41,7 @@ Replace `YEAR` with the year of the version used, `MAJOR.YEAR.NUMBER` with the f
 - **Automated accounting**: The number times a function is evaluated is automatically incremented and stored (`ObjectiveFunction.nb_calls`).
 - **Automatic differentiation**: Built-in numerical first- and second-order differentiation (`ObjectiveFunction.compute_first_derivative()` and `ObjectiveFunction.compute_second_derivative()`).
 - **Parallel evaluation**: Built-in support for parallel evaluation (`ObjectiveFunction.parallel_evaluate()`).
-- **Profiling**: Built-in profiling of the objective function's caller function (`ObjectiveFunction.profile_evaluate()`).
+- **Profiling**: Built-in profiling of the objective function's caller function (`ObjectiveFunction.profile()`).
 - **Shifting**: Apply shifts to evaluate robustness to positional bias (`ObjectiveFunction.apply_shift()`).
 - **Rotating**: Apply rotations to evaluate robustness to linkage (`ObjectiveFunction.apply_rotation()`).
 - **Noisy evaluation**: Apply noise to evaluate robustness to noisy environments (`ObjectiveFunction.apply_noise()`).
