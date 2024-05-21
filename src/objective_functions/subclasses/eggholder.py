@@ -16,7 +16,6 @@ class Eggholder(of.ObjectiveFunction):
 
     @of.constructor
     def __init__(self,
-                 parameters: dict = {},
                  settings: DefaultSettings = {}):
 
         # Validate default settings
