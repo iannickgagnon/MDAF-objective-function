@@ -308,7 +308,7 @@ class ObjectiveFunction(ABC):
         elif len(dimensions) == 2:
 
             # Create the figure and axes
-            fig, axs = plt.subplots(1, 2, figsize=(12, 6))
+            fig, axs = plt.subplots(1, 2, figsize=(13, 6))
 
             # Define the grid
             x_min, x_max = plot_bounds[0]
@@ -334,6 +334,8 @@ class ObjectiveFunction(ABC):
                 axs[0].scatter(self.optimal_solution_position[dimensions[0]],
                             self.optimal_solution_position[dimensions[1]],
                             color='yellow', marker='*', edgecolor='black', s=200)
+                
+            plt.tight_layout()
             
             def on_contour_click(event) -> None:
                 """
