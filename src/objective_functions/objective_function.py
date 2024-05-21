@@ -281,7 +281,7 @@ class ObjectiveFunction(ABC):
         # Adjust the plot bounds
         if plot_bounds and len(plot_bounds) != len(dimensions):
             raise ValueError("The number of bounds must match the number of dimensions.")
-        else:
+        elif not plot_bounds:
             plot_bounds = self.search_space_bounds
         
         if self.dimensionality == 1 or len(dimensions) == 1:  

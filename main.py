@@ -22,7 +22,7 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    DropWave().visualize()  
+    DropWave().visualize(plot_bounds=[(-1,1),(-1,1)])  
     
     '''
     foo = DropWave()
