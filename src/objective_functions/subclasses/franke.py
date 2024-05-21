@@ -7,8 +7,8 @@ from .. import objective_function as of
 from ..default_settings import DefaultSettings
 
 DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
-                                   optimal_solution=0.03586959238610449,
-                                   optimal_solution_position=np.ones(2),
+                                   optimal_solution=-1.2185807,
+                                   optimal_solution_position=np.array([0.2, 0.2]),
                                    search_space_bounds=np.array([(0, 1), (0, 1)]))
 
 
@@ -43,4 +43,4 @@ class Franke(of.ObjectiveFunction):
         term3 = 0.5 * np.exp(-(9 * x - 7) ** 2 / 4 - (9 * y - 3) ** 2 / 4)
         term4 = -0.2 * np.exp(-(9 * x - 4) ** 2 - (9 * y - 7) ** 2)
 
-        return term1 + term2 + term3 + term4
+        return -(term1 + term2 + term3 + term4)

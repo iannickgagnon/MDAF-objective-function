@@ -22,7 +22,13 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    Eggholder().visualize()
+    foo = Franke()
+
+    foo.visualize()
+    
+    print(foo(np.array([[0.2, 0.2]])))
+
+
     
     '''
     foo = DropWave()
