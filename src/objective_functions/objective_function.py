@@ -296,10 +296,9 @@ class ObjectiveFunction(ABC):
             y = self.__evaluate(x)
 
             # Draw the line plot
-            ax.plot(x, y, label=f'Objective Function along X{dimensions[0]}')
+            ax.plot(x, y)
             ax.set_xlabel(f'X{dimensions[0]}')
             ax.set_ylabel('Fitness')
-            ax.set_title('1D Visualization of Objective Function')
             ax.grid(True, linestyle='--', alpha=0.5)
             ax.legend()
 
@@ -690,7 +689,7 @@ class ObjectiveFunction(ABC):
         
         # Wrap the evaluate method
         def evaluate_wrapper():
-            for i in range(nb_calls):
+            for _ in range(nb_calls):
                 self.evaluate(position)
 
         # Print the profiling message

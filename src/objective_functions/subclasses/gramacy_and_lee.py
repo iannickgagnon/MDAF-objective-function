@@ -33,3 +33,4 @@ class GramacyAndLee(of.ObjectiveFunction):
             float: The Gramacy & Lee function value at the given position.
         """
         return np.sin(10 * np.pi * position) / (2 * position) + (position - 1) ** 4
+    
