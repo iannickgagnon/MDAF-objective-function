@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     foo = Griewank()
 
-    foo.visualize()
+    foo.visualize(plot_bounds=[(-5, 5), (-5, 5)])
     
 
     '''
