@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     foo =  Rosenbrock()
 
-    foo.visualize(plot_bounds=[(-3, 3), (-0.25, 1.25)])
+    foo.visualize()
     
 
     '''
