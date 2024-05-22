@@ -3,7 +3,7 @@
 
 The Metaheuristics Design And Analysis Framework (MDAF) is an open-source collection of Python modules designed specifically for the metaheuristics research community. It provides off-the-shelf tools that promote and facilitate rigorous scientific research based on firmly established best practices.
 
-# The Objective Function Evaluation Module
+# The Objective Function Module
 
 The `MDAF-objective-function` module  is a specialized tool designed to streamline the process of defining and evaluating objective functions. It offers a low-code template that simplifies the setup and execution of complex objective functions, allowing researchers to concentrate more on refining their algorithms and less on the intricacies of coding.
 
