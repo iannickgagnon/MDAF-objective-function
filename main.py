@@ -22,9 +22,9 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    foo = GramacyAndLee()
+    foo =  Rosenbrock()
 
-    foo.visualize()
+    foo.visualize(plot_bounds=[(-3, 3), (-0.25, 1.25)])
     
 
     '''
