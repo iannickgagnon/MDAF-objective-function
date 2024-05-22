@@ -300,7 +300,6 @@ class ObjectiveFunction(ABC):
             ax.set_xlabel(f'X{dimensions[0]}')
             ax.set_ylabel('Fitness')
             ax.grid(True, linestyle='--', alpha=0.5)
-            ax.legend()
 
             plt.show()
 
