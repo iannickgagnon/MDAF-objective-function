@@ -335,9 +335,14 @@ class ObjectiveFunction(ABC):
 
             # Show the optimal solution on the contour plot
             if self.optimal_solution_position is not None:
-                axs[0].scatter(self.optimal_solution_position[dimensions[0]],
-                            self.optimal_solution_position[dimensions[1]],
-                            color='yellow', marker='*', edgecolor='black', s=200)
+                if isinstance(self.optimal_solution_position[0], Iterable):
+                    for position in self.optimal_solution_position:
+                        axs[0].scatter(position[dimensions[0]], position[dimensions[1]], 
+                                       color='yellow', marker='*', edgecolor='black', s=200)
+                else:
+                    axs[0].scatter(self.optimal_solution_position[dimensions[0]],
+                                self.optimal_solution_position[dimensions[1]],
+                                color='yellow', marker='*', edgecolor='black', s=200)
                 
             plt.tight_layout()
             
@@ -386,13 +391,23 @@ class ObjectiveFunction(ABC):
      
             # Show the optimal solution on the surface plot
             if self.optimal_solution_position is not None:
-                axs[1].scatter(self.optimal_solution_position[dimensions[0]], 
-                               self.optimal_solution_position[dimensions[1]], 
-                               self.optimal_solution, 
-                               color='yellow', 
-                               marker='*', 
-                               edgecolor='black', 
-                               s=200)
+                if isinstance(self.optimal_solution_position[0], Iterable):
+                    for position in self.optimal_solution_position:
+                        axs[1].scatter(position[dimensions[0]], 
+                                       position[dimensions[1]], 
+                                       self.optimal_solution,
+                                       color='yellow', 
+                                       marker='*', 
+                                       edgecolor='black', 
+                                       s=200)
+                else:
+                    axs[1].scatter(self.optimal_solution_position[dimensions[0]],
+                                   self.optimal_solution_position[dimensions[1]],
+                                   self.optimal_solution,
+                                   color='yellow', 
+                                   marker='*', 
+                                   edgecolor='black', 
+                                   s=200)
 
             # Adjust the layout
             plt.tight_layout()
