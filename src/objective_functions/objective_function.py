@@ -71,8 +71,14 @@ class ObjectiveFunction(ABC):
 
     def __init__(self):
         
+        # Measure the dimensionality of the provided optimal solution position
+        if isinstance(self.optimal_solution_position[0], Iterable):
+            optimal_solution_dim = len(self.optimal_solution_position[0])
+        else:
+            optimal_solution_dim = len(self.optimal_solution_position)
+
         # Validate the size of the optimal solution position
-        if self.optimal_solution_position is not None and len(self.optimal_solution_position) != self.dimensionality:
+        if self.optimal_solution_position is not None and optimal_solution_dim != self.dimensionality:
                 raise ValueError("The size of the optimal position must match the dimensionality.")
 
         # Validate the size of the search space bounds

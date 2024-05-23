@@ -22,9 +22,9 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    foo = Griewank()
+    foo = HolderTable()
 
-    foo.visualize(plot_bounds=[(-5, 5), (-5, 5)])
+    foo.visualize()
     
 
     '''
