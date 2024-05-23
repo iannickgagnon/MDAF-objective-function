@@ -72,7 +72,7 @@ class ObjectiveFunction(ABC):
     def __init__(self):
 
         # Measure the dimensionality of the provided optimal solution position
-        if self.optimal_solution_position:
+        if np.any(self.optimal_solution_position):
 
             if isinstance(self.optimal_solution_position[0], Iterable):
                 optimal_solution_dim = len(self.optimal_solution_position[0])
