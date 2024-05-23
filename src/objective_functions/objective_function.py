@@ -317,6 +317,13 @@ class ObjectiveFunction(ABC):
 
         elif len(dimensions) == 2:
 
+            # Default colormap
+            if 'cmap' not in plot_2d_kwargs:
+                plot_2d_kwargs['cmap'] = 'jet'
+            
+            if 'cmap' not in plot_3d_kwargs:
+                plot_3d_kwargs['cmap'] = 'jet'
+
             # Create the figure and axes
             fig, axs = plt.subplots(1, 2, figsize=(13, 6))
 
