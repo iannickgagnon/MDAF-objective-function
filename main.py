@@ -22,9 +22,15 @@ from src.objective_functions.subclasses.levy import Levy
 
 if __name__ == "__main__":
 
-    foo = HolderTable()
+    # Instantiate objective function
+    foo = Langermann()
 
-    foo.visualize()
+    # Define a common colormap
+    plot_kwargs = {'cmap': 'hsv'}
+
+    # Visualize the objective function
+    foo.visualize(plot_2d_kwargs=plot_kwargs,
+                  plot_3d_kwargs=plot_kwargs)
     
 
     '''

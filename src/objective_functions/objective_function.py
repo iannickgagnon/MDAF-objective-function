@@ -70,20 +70,22 @@ class ObjectiveFunction(ABC):
     parameters: dict = {}
 
     def __init__(self):
-        
+
         # Measure the dimensionality of the provided optimal solution position
-        if isinstance(self.optimal_solution_position[0], Iterable):
-            optimal_solution_dim = len(self.optimal_solution_position[0])
-        else:
-            optimal_solution_dim = len(self.optimal_solution_position)
+        if self.optimal_solution_position:
 
-        # Validate the size of the optimal solution position
-        if self.optimal_solution_position is not None and optimal_solution_dim != self.dimensionality:
-                raise ValueError("The size of the optimal position must match the dimensionality.")
+            if isinstance(self.optimal_solution_position[0], Iterable):
+                optimal_solution_dim = len(self.optimal_solution_position[0])
+            else:
+                optimal_solution_dim = len(self.optimal_solution_position)
 
-        # Validate the size of the search space bounds
-        if len(self.search_space_bounds) != self.dimensionality:
-            raise ValueError("The size of the search space bounds must match the dimensionality of the objective function.")
+            # Validate the size of the optimal solution position
+            if self.optimal_solution_position is not None and optimal_solution_dim != self.dimensionality:
+                    raise ValueError("The size of the optimal position must match the dimensionality.")
+
+            # Validate the size of the search space bounds
+            if len(self.search_space_bounds) != self.dimensionality:
+                raise ValueError("The size of the search space bounds must match the dimensionality of the objective function.")
 
         # Initialize shift
         self.shift: np.ndarray = np.zeros(self.dimensionality)
@@ -267,7 +269,9 @@ class ObjectiveFunction(ABC):
     def visualize(self, 
                   dimensions: Iterable[int] = (0, 1), 
                   plot_bounds: Iterable[Iterable[Number]] = None, 
-                  resolution: int = 100):
+                  resolution: int = 100,
+                  plot_2d_kwargs: dict = {},
+                  plot_3d_kwargs: dict = {}) -> None:
         """
         Visualizes the objective function in 2D or 3D.
 
@@ -275,6 +279,8 @@ class ObjectiveFunction(ABC):
             dimensions (Iterable[int]): The dimensions to visualize. Must be an iterable of length 2 or 3.
             bounds (Iterable[Iterable[Number]]): The bounds of the visualization. Must be an iterable of length 2 or 3.
             resolution (int): The resolution of the visualization grid.
+            plot_2d_kwargs (dict, optional): Additional keyword arguments for the 2D plot.
+            plot_3d_kwargs (dict, optional): Additional keyword arguments for the 3D plot.
 
         Raises:
             AssertionError: If the number of dimensions is not 2 or 3.
@@ -328,7 +334,7 @@ class ObjectiveFunction(ABC):
 
             # Draw the contour plot with level curves
             levels = np.linspace(np.min(Z), np.max(Z), num=min(resolution // 10, 10))
-            cs = axs[0].contourf(X, Y, Z, levels=levels, cmap='jet')
+            cs = axs[0].contourf(X, Y, Z, levels=levels, **plot_2d_kwargs)
             axs[0].contour(cs, colors='k', linewidths=1.0)
             axs[0].set_xlabel(f"X{dimensions[0]}")
             axs[0].set_ylabel(f"X{dimensions[1]}")
@@ -384,7 +390,7 @@ class ObjectiveFunction(ABC):
             # 3D surface visualization
             axs[1].axis('off')
             axs[1] = fig.add_subplot(122, projection='3d')
-            axs[1].plot_surface(X, Y, Z, cmap='jet', alpha=0.5)
+            axs[1].plot_surface(X, Y, Z, **plot_3d_kwargs)
             axs[1].set_xlabel(f"X{dimensions[0]}")
             axs[1].set_ylabel(f"X{dimensions[1]}")
             axs[1].set_zlabel(f"f(X{dimensions[0]}, X{dimensions[1]})")

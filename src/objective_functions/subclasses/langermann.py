@@ -1,4 +1,3 @@
-
 # External libraries
 import numpy as np
 
@@ -7,7 +6,8 @@ from .. import objective_function as of
 from ..default_settings import DefaultSettings
 
 DEFAULT_PARAMETERS = {'A': np.array([[3, 5], [5, 2], [2, 1], [1, 4], [7, 9]]), 
-                      'm': 5}
+                      'm': 5,
+                      'c': np.array([1, 2, 5, 2, 3])}
 
 DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
                                    optimal_solution=None,
@@ -41,9 +41,13 @@ class Langermann(of.ObjectiveFunction):
         
         m = self.parameters['m']
         A = self.parameters['A']
+        c = self.parameters['c']
         
-        xi = position - A
-        sum_xi_squared = np.sum(xi**2, axis=1)
-        sum_xi = np.sum(xi, axis=1)
-    
-        return -np.sum(np.exp(-sum_xi_squared / np.pi) * np.cos(np.pi * sum_xi))
+        result = 0.0
+        for i in range(m):
+            xi = position - A[i]
+            sum_xi_squared = np.sum(xi**2)
+            term = c[i] * np.exp(-sum_xi_squared / np.pi) * np.cos(np.pi * sum_xi_squared)
+            result += term
+            
+        return -result
