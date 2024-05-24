@@ -1,5 +1,3 @@
-[[view source](https://github.com/iannickgagnon/MDAF-objective-function/blob/main/src/objective_functions/subclasses/ackley.py)]
-
 ![](./doc/img/logo_top.png)
 ![](./doc/img/logo_bottom.png)
 
