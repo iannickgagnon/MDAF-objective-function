@@ -193,7 +193,7 @@ class ObjectiveFunction(ABC):
             list[float, (float, float)]: The average execution time of the evaluate method a 95% bootstrap confidence interval.
         """
 
-        # Wrap the function to evaluate
+        # Wrap the evaluation function
         wrapper = lambda: self.evaluate(np.array([np.random.uniform(low, high) for low, high in self.search_space_bounds]))
 
         # Generate the bootstrap sample
