@@ -81,7 +81,13 @@ If you aren't familiar with git, you may wish to consult the following online e-
 I have also greatly benefited from the following official cheat sheet from GitHub:
 * https://education.github.com/git-cheat-sheet-education.pdf
 
-## Built-in objective functions
+## Documentation
+
+Visit the MDAF-objective-fuction wiki ([click here](https://github.com/iannickgagnon/MDAF-objective-function/wiki)) for the following : 
+
+* User guide
+* Contribution guide
+* API reference
 
 ## Future work
 
