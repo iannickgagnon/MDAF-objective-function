@@ -232,7 +232,7 @@ class ObjectiveFunction(ABC):
             # Import the decoupled evaluate function
             if os.path.exists(DECOUPLED_FUNCTION_PATH):
                 try:
-                    from objective_functions.tmp.decoupled_evaluate import evaluate as decoupled_evaluate   # type: ignore
+                    from mdaf_objective_functions.tmp.decoupled_evaluate import evaluate as decoupled_evaluate   # type: ignore
                 except Exception as e:
                     raise ImportError(f"Failed to import the decoupled evaluate method with traceback: {e}")
 

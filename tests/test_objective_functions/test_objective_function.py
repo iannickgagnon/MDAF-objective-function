@@ -2,7 +2,7 @@ import os
 import pytest
 import numpy as np
 from unittest.mock import MagicMock
-from src.objective_functions.objective_function import ObjectiveFunction, count_calls, constructor
+from MDAF_objective_functions.objective_function import ObjectiveFunction, count_calls, constructor
 
 # Fixtures for creating instances of ObjectiveFunction
 

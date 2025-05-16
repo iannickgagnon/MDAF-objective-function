@@ -3,22 +3,22 @@
 import numpy as np
 
 # Internal libraries
-from src.objective_functions.subclasses.sphere import Sphere
-from src.objective_functions.subclasses.rosenbrock import Rosenbrock
-from src.objective_functions.subclasses.rastrigin import Rastrigin
-from src.objective_functions.subclasses.ackley import Ackley
-from src.objective_functions.subclasses.griewank import Griewank
-from src.objective_functions.subclasses.michalewicz import Michalewicz
-from src.objective_functions.subclasses.styblinski_tang import StyblinskiTang
-from src.objective_functions.subclasses.bukin6 import Bukin6 
-from src.objective_functions.subclasses.dropwave import DropWave
-from src.objective_functions.subclasses.eggholder import Eggholder
-from src.objective_functions.subclasses.gramacy_and_lee import GramacyAndLee
-from src.objective_functions.subclasses.holder_table import HolderTable
-from src.objective_functions.subclasses.franke import Franke
-from src.objective_functions.subclasses.six_hump_camel_back import SixHumpCamelBack
-from src.objective_functions.subclasses.langermann import Langermann
-from src.objective_functions.subclasses.levy import Levy
+from MDAF_objective_functions.implementations.sphere import Sphere
+from MDAF_objective_functions.implementations.rosenbrock import Rosenbrock
+from MDAF_objective_functions.implementations.rastrigin import Rastrigin
+from MDAF_objective_functions.implementations.ackley import Ackley
+from MDAF_objective_functions.implementations.griewank import Griewank
+from MDAF_objective_functions.implementations.michalewicz import Michalewicz
+from MDAF_objective_functions.implementations.styblinski_tang import StyblinskiTang
+from MDAF_objective_functions.implementations.bukin6 import Bukin6 
+from MDAF_objective_functions.implementations.dropwave import DropWave
+from MDAF_objective_functions.implementations.eggholder import Eggholder
+from MDAF_objective_functions.implementations.gramacy_and_lee import GramacyAndLee
+from MDAF_objective_functions.implementations.holder_table import HolderTable
+from MDAF_objective_functions.implementations.franke import Franke
+from MDAF_objective_functions.implementations.six_hump_camel_back import SixHumpCamelBack
+from MDAF_objective_functions.implementations.langermann import Langermann
+from MDAF_objective_functions.implementations.levy import Levy
 
 if __name__ == "__main__":
 
