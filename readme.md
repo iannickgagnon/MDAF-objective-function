@@ -83,7 +83,7 @@ I have also greatly benefited from the following official cheat sheet from GitHu
 
 ## Documentation
 
-Visit the `MDAF-objective-fuction` wiki ([click here](https://github.com/iannickgagnon/MDAF_objective_functions/wiki)) for the following : 
+Visit the `MDAF_objective_functions` wiki ([click here](https://github.com/iannickgagnon/MDAF_objective_functions/wiki)) for the following : 
 
 * User guide
 * Contribution guide
