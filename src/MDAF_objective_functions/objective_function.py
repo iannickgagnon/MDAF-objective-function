@@ -482,7 +482,6 @@ class ObjectiveFunction(ABC):
         Shifts the given position by the given shift vector.
 
         Args:
-            position (np.ndarray): The position to shift.
             shift (np.ndarray): The shift vector.
 
         Returns:
