@@ -15,6 +15,23 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2,
     
     
 class Ackley(of.ObjectiveFunction):
+    """
+    Ackley objective function implementation.
+
+    This class implements the Ackley function, a widely used benchmark for evaluating optimization algorithms.
+    The function is characterized by a nearly flat outer region and a steep central basin, making it challenging
+    for algorithms to locate the global minimum.
+
+    Attributes:
+        parameters (dict): Dictionary containing the parameters 'A', 'B', and 'C' for the Ackley function.
+        settings (DefaultSettings): Object containing the search space and other configuration values.
+
+    Methods:
+        __init__(parameters: dict = {}, settings: DefaultSettings = {}):
+            Initializes the function with given parameters and settings, applying defaults if needed.
+        evaluate(position: np.ndarray) -> float:
+            Computes the function value at the given position.
+    """
 
     @of.constructor
     def __init__(self,
