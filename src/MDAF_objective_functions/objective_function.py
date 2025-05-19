@@ -247,18 +247,21 @@ class ObjectiveFunction(ABC):
         with ProcessPoolExecutor(max_workers=max_workers) as executor:
 
             # Submit all evaluations to the executor
-            future_to_position = {executor.submit(decoupled_evaluate, pos): pos for pos in positions}
+            future_to_index = {
+                executor.submit(decoupled_evaluate, pos): i for i, pos in enumerate(positions)
+            }
+
+            # Pre-fill with NaNs to mark failed positions clearly
+            results = np.full(len(positions), np.nan)
 
             # Collect results as they are completed
-            results = np.zeros(len(positions))
-            for future in as_completed(future_to_position):
-                pos = future_to_position[future]
+            for future in as_completed(future_to_index):
+                index = future_to_index[future]
                 try:
                     result = future.result()
                 except Exception as e:
-                    print(f'{pos} generated an exception: {e}')
+                    print(f'Position at index {index} generated an exception: {e}')
                 else:
-                    index = np.where((positions == pos).all(axis=1))[0][0]
                     results[index] = result
         
         # Delete the decoupled evaluate function file
