@@ -1,4 +1,3 @@
-
 # External libraries
 import numpy as np
 
@@ -17,11 +16,13 @@ class DefaultSettings:
         Same as the arguments.
     """
 
-    def __init__(self, 
-                 dimensionality: int,
-                 optimal_solution: float, 
-                 optimal_solution_position: np.ndarray, 
-                 search_space_bounds: np.ndarray):
+    def __init__(
+        self,
+        dimensionality: int,
+        optimal_solution: float,
+        optimal_solution_position: np.ndarray,
+        search_space_bounds: np.ndarray,
+    ):
         self.dimensionality = dimensionality
         self.optimal_solution = optimal_solution
         self.optimal_solution_position = optimal_solution_position
@@ -30,10 +31,9 @@ class DefaultSettings:
     # Implement dictionary-like behavior
     def __iter__(self):
         return iter(self.__dict__)
-    
+
     def __next__(self):
         return next(self.__dict__)
-    
+
     def __getitem__(self, key):
         return getattr(self, key)
-    
