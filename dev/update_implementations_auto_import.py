@@ -1,3 +1,16 @@
+"""
+This script updates the `__init__.py` file in the `src/MDAF_objective_functions` directory to automatically import 
+all concrete implementations of the `ObjectiveFunction` class.
+
+This simplified import syntax for clients in the following way:
+
+    from MDAF_objective_functions import Eggholder
+
+Instead of:
+
+    from MDAF_objective_functions.implementations.eggholder import Eggholder
+"""
+
 import os
 
 # Path to concrete implementations of the ObjectiveFunction class
