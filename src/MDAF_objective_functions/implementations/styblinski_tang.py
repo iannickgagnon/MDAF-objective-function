@@ -28,6 +28,9 @@ class StyblinskiTang(of.ObjectiveFunction):
             Initializes the function with the provided settings, applying defaults if necessary.
         evaluate(position: np.ndarray) -> float:
             Computes the Styblinski-Tang function value at the given position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Styblinski%E2%80%90Tang
     """
 
     @of.constructor

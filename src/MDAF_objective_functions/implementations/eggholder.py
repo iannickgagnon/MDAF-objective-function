@@ -13,6 +13,24 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
 
 
 class Eggholder(of.ObjectiveFunction):
+    """
+    Eggholder objective function implementation.
+
+    This class implements the Eggholder function, a complex and multimodal benchmark used for testing optimization algorithms.
+    The function features many local minima and a challenging landscape, making it suitable for evaluating global optimization methods.
+
+    Attributes:
+        settings (DefaultSettings): Object containing the search space bounds, optimal solution, and other configuration values.
+
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with the provided settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Eggholder function value at the specified position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Eggholder
+    """
 
     @of.constructor
     def __init__(self,

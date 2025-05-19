@@ -30,8 +30,11 @@ class Michalewicz(of.ObjectiveFunction):
             Initializes the function with given parameters and settings, applying defaults if needed.
         evaluate(position: np.ndarray) -> float:
             Computes the function value at the given position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Michalewicz
     """
-    
+
     @of.constructor
     def __init__(self,
                  parameters: dict = {},

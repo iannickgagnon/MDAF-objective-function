@@ -28,8 +28,11 @@ class Sphere(of.ObjectiveFunction):
             Initializes the function with the provided settings, applying defaults if necessary.
         evaluate(position: np.ndarray) -> float:
             Computes the Sphere function value at the given position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Sphere
     """
-    
+
     @of.constructor
     def __init__(self,
                  settings: DefaultSettings = {}):

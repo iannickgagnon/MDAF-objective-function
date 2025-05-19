@@ -34,6 +34,9 @@ class HolderTable(of.ObjectiveFunction):
             Initializes the function with specified parameters and settings, applying defaults if necessary.
         evaluate(position: np.ndarray) -> float:
             Computes the Holder Table function value at the given position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Holder-Table
     """
 
     @of.constructor

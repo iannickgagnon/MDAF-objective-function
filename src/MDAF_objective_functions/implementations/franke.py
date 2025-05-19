@@ -13,6 +13,25 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
 
 
 class Franke(of.ObjectiveFunction):
+    """
+    Franke objective function implementation.
+
+    This class implements the Franke function, a commonly used benchmark for testing optimization algorithms,
+    especially in the context of surface fitting and interpolation. The function features multiple local minima
+    and a known global minimum, providing a challenging landscape for optimization methods.
+
+    Attributes:
+        settings (DefaultSettings): Object containing the search space bounds, optimal solution, and other configuration values.
+
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with provided or default settings, validating configuration.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Franke function value at the specified position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Franke
+    """
 
     @of.constructor
     def __init__(self,

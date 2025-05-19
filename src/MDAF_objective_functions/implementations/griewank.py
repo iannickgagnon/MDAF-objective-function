@@ -13,6 +13,25 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality= 2,
 
 
 class Griewank(of.ObjectiveFunction):
+    """
+    Griewank objective function implementation.
+
+    This class implements the Griewank function, a commonly used benchmark for testing optimization algorithms.
+    The function is characterized by many widespread local minima, making it difficult for optimization methods
+    to find the global minimum.
+
+    Attributes:
+        settings (DefaultSettings): Object containing the search space bounds, dimensionality, and other configuration values.
+
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with the provided settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Griewank function value at the specified position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Griewank
+    """
 
     @of.constructor
     def __init__(self,

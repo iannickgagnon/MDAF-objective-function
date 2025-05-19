@@ -27,8 +27,11 @@ class Bukin6(of.ObjectiveFunction):
             Initializes the function with the provided settings, applying defaults if necessary.
         evaluate(position: np.ndarray) -> float:
             Computes the Bukin no. 6 function value at the specified position.
-    """
     
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Bukin-no.6
+    """
+
     @of.constructor
     def __init__(self,
                  settings: DefaultSettings = {}):

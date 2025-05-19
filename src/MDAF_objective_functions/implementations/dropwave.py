@@ -13,6 +13,25 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2,
 
 
 class DropWave(of.ObjectiveFunction):
+    """
+    DropWave objective function implementation.
+
+    This class implements the DropWave function, a standard benchmark for testing optimization algorithms.
+    The DropWave function is characterized by its steep valleys and multiple local minima, making it a
+    challenging landscape for optimization techniques.
+
+    Attributes:
+        settings (DefaultSettings): Object containing the search space bounds, optimal solution, and other configuration values.
+
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with the provided settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the DropWave function value at the specified position.
+    
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Drop%E2%80%90Wave
+    """
 
     @of.constructor
     def __init__(self,

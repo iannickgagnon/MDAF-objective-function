@@ -13,6 +13,25 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2,
 
 
 class Rosenbrock(of.ObjectiveFunction):
+    """
+    Rosenbrock objective function implementation.
+
+    This class implements the Rosenbrock function, a classic benchmark for testing optimization algorithms.
+    The function features a narrow, curved valley leading to the global minimum, making it challenging for
+    optimization methods to converge efficiently.
+
+    Attributes:
+        settings (DefaultSettings): Object containing the search space bounds, optimal solution, and other configuration values.
+
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with provided or default settings.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Rosenbrock function value at the specified position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Rosenbrock
+    """
 
     @of.constructor
     def __init__(self,

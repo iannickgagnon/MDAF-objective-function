@@ -16,6 +16,25 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
 
 
 class Langermann(of.ObjectiveFunction):
+    """
+    Langermann objective function implementation.
+
+    This class implements the Langermann function, a multimodal benchmark function commonly used for testing optimization algorithms.
+    The function features multiple local minima, making it suitable for evaluating the performance of global optimization techniques.
+
+    Attributes:
+        parameters (dict): Dictionary containing the parameters 'A', 'm', and 'c' for the Langermann function.
+        settings (DefaultSettings): Object containing the search space bounds and other configuration values.
+
+    Methods:
+        __init__(parameters: dict = {}, settings: DefaultSettings = {}):
+            Initializes the function with provided parameters and settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Langermann function value at the specified position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Langermann
+    """
 
     @of.constructor
     def __init__(self,

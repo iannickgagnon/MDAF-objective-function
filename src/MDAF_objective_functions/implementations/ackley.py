@@ -31,6 +31,9 @@ class Ackley(of.ObjectiveFunction):
             Initializes the function with given parameters and settings, applying defaults if needed.
         evaluate(position: np.ndarray) -> float:
             Computes the function value at the given position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Ackley
     """
 
     @of.constructor

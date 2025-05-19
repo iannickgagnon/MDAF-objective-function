@@ -15,6 +15,26 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2,
 
 
 class Rastrigin(of.ObjectiveFunction):
+    """
+    Rastrigin objective function implementation.
+
+    This class implements the Rastrigin function, a standard benchmark for optimization algorithms.
+    The Rastrigin function is highly multimodal with a large number of local minima, making it a challenging
+    test case for global optimization methods.
+
+    Attributes:
+        parameters (dict): Dictionary containing the parameter 'A' for the Rastrigin function.
+        settings (DefaultSettings): Object containing the search space and other configuration values.
+
+    Methods:
+        __init__(parameters: dict = {}, settings: DefaultSettings = {}):
+            Initializes the function with given parameters and settings, applying defaults if needed.
+        evaluate(position: np.ndarray) -> float:
+            Computes the function value at the given position.
+    
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Rastrigin
+    """
 
     @of.constructor
     def __init__(self,

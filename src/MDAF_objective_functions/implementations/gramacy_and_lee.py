@@ -13,6 +13,25 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality=1,
 
 
 class GramacyAndLee(of.ObjectiveFunction):
+    """
+    Gramacy & Lee objective function implementation.
+
+    This class implements the Gramacy & Lee function, a benchmark function commonly used for testing
+    optimization algorithms. The function is known for its non-convexity and multiple local minima,
+    providing a challenging landscape for optimization.
+
+    Attributes:
+        settings (DefaultSettings): Object containing the search space bounds, optimal solution, and other configuration values.
+
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with the provided settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the function value at the specified position.
+
+    Reference:
+        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Gramacy-and-Lee
+    """
 
     @of.constructor
     def __init__(self,
