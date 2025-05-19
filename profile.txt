@@ -1,0 +1,40 @@
+Timer unit: 1e-07 s
+
+Total time: 4.28375 s
+File: C:\Users\Iannick\Desktop\Repositories\MDAF_objective_functions\src\MDAF_objective_functions\implementations\drop_wave.py
+Function: evaluate at line 43
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    43                                               def evaluate(self, position: np.ndarray) -> float:
+    44                                                   """
+    45                                                   Evaluates the Dropwave function at the given position.
+    46                                           
+    47                                                   Args:
+    48                                                       position (np.ndarray): The position to evaluate.
+    49                                           
+    50                                                   Returns:
+    51                                                       float: The Dropwave function value at the given position.
+    52                                                   """
+    53                                           
+    54       100       2182.0     21.8      0.0          if position.ndim == 1:
+    55                                                       position = position.reshape(1, -1)
+    56                                           
+    57       100       3786.0     37.9      0.0          x = position[:, 0]
+    58       100        655.0      6.5      0.0          y = position[:, 1]
+    59                                           
+    60       100   25566101.0 255661.0     59.7          numerator = 1 + np.cos(12 * np.sqrt(x**2 + y**2))
+    61       100   12660524.0 126605.2     29.6          denominator = 0.5 * (x**2 + y**2) + 2
+    62                                           
+    63       100    4604252.0  46042.5     10.7          return -numerator / denominator
+
+Total time: 4.43583 s
+File: C:\Users\Iannick\Desktop\Repositories\MDAF_objective_functions\src\MDAF_objective_functions\objective_function.py
+Function: evaluate_wrapper at line 805
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+   805                                                   def evaluate_wrapper():
+   806       101        958.0      9.5      0.0              for _ in range(nb_calls):
+   807       100   44357342.0 443573.4    100.0                  self.evaluate(position)
+

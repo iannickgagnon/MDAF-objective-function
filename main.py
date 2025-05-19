@@ -17,13 +17,12 @@ from MDAF_objective_functions import SixHumpCamelBack
 from MDAF_objective_functions import Sphere
 from MDAF_objective_functions import StyblinskiTang
 
+import MDAF_objective_functions as of
 
 if __name__ == "__main__":
 
-    # Instantiate objective function
-    StyblinskiTang().visualize()
-
     """
+    # Advanced functionality: Profiling
     foo = DropWave()
     foo.profile(nb_calls=100, 
                 nb_positions=int(1e6), 

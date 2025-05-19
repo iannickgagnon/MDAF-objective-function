@@ -50,4 +50,4 @@ class Sphere(of.ObjectiveFunction):
         Returns:
             float: The Sphere function value at the given position.
         """
-        return np.sum(position**2)
+        return np.sum(position**2, axis=1)

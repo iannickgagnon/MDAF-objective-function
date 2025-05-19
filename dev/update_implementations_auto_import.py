@@ -56,11 +56,12 @@ with open(init_file_path, "w", encoding="utf-8") as f:
     f.write('\n'.join(lines))
 
     # Add helper function to list all objective functions
-    f.write("\n\ndef show_all() -> list[str]:\n")
+    f.write("\n\ndef show_all() -> None:\n")
     f.write('    """\n')
     f.write('    Helper function to list all objective functions available in the package.\n')
     f.write('    """\n')
-    f.write('    return __all__\n')
+    f.write('    for entry in __all__:\n')
+    f.write('        print(entry)\n')
     f.write('\n')
     
 print(f"Updated {init_file_path} with {len(all_entries)} exports.")

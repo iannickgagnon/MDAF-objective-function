@@ -51,9 +51,10 @@ StyblinskiTang: type[_StyblinskiTang] = _StyblinskiTang
 
 __all__ = ["Ackley", "Bukin6", "DropWave", "Eggholder", "Franke", "GramacyAndLee", "Griewank", "HolderTable", "Langermann", "Levy", "Michalewicz", "Rastrigin", "Rosenbrock", "SixHumpCamelBack", "Sphere", "StyblinskiTang"]
 
-def show_all() -> list[str]:
+def show_all() -> None:
     """
     Helper function to list all objective functions available in the package.
     """
-    return __all__
+    for entry in __all__:
+        print(entry)
 
