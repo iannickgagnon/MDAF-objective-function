@@ -182,7 +182,7 @@ class ObjectiveFunction(ABC):
         return self.evaluate(position - self.shift) + self.noise_mean + np.random.randn(position.shape[0]) * self.noise_variance
     
 
-    def time(self, nb_runs: int = 10000, output=False) -> list[float, (float, float)]:
+    def time(self, nb_runs: int = 10000, output: bool = False) -> list[float, (float, float)]:
         """
         Measures the execution time of the evaluate method and calculates a 95% bootstrap confidence interval.
 
