@@ -67,9 +67,10 @@ def constructor(foo: Callable):
 
 class ObjectiveFunction(ABC):
 
-    parameters: dict = {}
-
     def __init__(self):
+
+        # Initialize parameters
+        self.parameters: dict = {}
 
         # Measure the dimensionality of the provided optimal solution position
         if np.any(self.optimal_solution_position):
