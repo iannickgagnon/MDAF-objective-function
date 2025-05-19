@@ -1,4 +1,3 @@
-
 # External libraries
 import numpy as np
 
@@ -6,14 +5,16 @@ import numpy as np
 from .. import objective_function as of
 from ..default_settings import DefaultSettings
 
-DEFAULT_PARAMETERS = {'A': 10, 'B': 0.2, 'C': 2 * np.pi}
+DEFAULT_PARAMETERS = {"A": 10, "B": 0.2, "C": 2 * np.pi}
 
-DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2, 
-                                   optimal_solution = 0.0, 
-                                   optimal_solution_position = np.zeros(2), 
-                                   search_space_bounds = np.array([[-32.768, 32.768], [-32.768, 32.768]]))
-    
-    
+DEFAULT_SETTINGS = DefaultSettings(
+    dimensionality=2,
+    optimal_solution=0.0,
+    optimal_solution_position=np.zeros(2),
+    search_space_bounds=np.array([[-32.768, 32.768], [-32.768, 32.768]]),
+)
+
+
 class Ackley(of.ObjectiveFunction):
     """
     Ackley objective function implementation.
@@ -37,9 +38,7 @@ class Ackley(of.ObjectiveFunction):
     """
 
     @of.constructor
-    def __init__(self,
-                 parameters: dict = {},
-                 settings: DefaultSettings = {}):
+    def __init__(self, parameters: dict = {}, settings: DefaultSettings = {}):
 
         # Validate the parameters and apply default values if necessary
         self.validate_parameters(parameters, DEFAULT_PARAMETERS)
@@ -57,15 +56,14 @@ class Ackley(of.ObjectiveFunction):
         Returns:
             float: The Ackley function value at the given position.
         """
-        
+
         n = len(position)
-        
-        A = self.parameters['A']
-        B = self.parameters['B']
-        C = self.parameters['C']
-        
+
+        A = self.parameters["A"]
+        B = self.parameters["B"]
+        C = self.parameters["C"]
+
         term1 = -A * np.exp(-B * np.sqrt(np.sum(position**2) / n))
         term2 = -np.exp(np.sum(np.cos(C * position)) / n)
-        
+
         return term1 + term2 + A + np.exp(1)
-    

@@ -1,4 +1,3 @@
-
 # External libraries
 import numpy as np
 
@@ -6,12 +5,14 @@ import numpy as np
 from .. import objective_function as of
 from ..default_settings import DefaultSettings
 
-DEFAULT_PARAMETERS = {'m': 10}
+DEFAULT_PARAMETERS = {"m": 10}
 
-DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
-                                   optimal_solution=None,
-                                   optimal_solution_position=None,
-                                   search_space_bounds=[(0, np.pi), (0, np.pi)])
+DEFAULT_SETTINGS = DefaultSettings(
+    dimensionality=2,
+    optimal_solution=None,
+    optimal_solution_position=None,
+    search_space_bounds=[(0, np.pi), (0, np.pi)],
+)
 
 
 class Michalewicz(of.ObjectiveFunction):
@@ -36,9 +37,7 @@ class Michalewicz(of.ObjectiveFunction):
     """
 
     @of.constructor
-    def __init__(self,
-                 parameters: dict = {},
-                 settings: DefaultSettings = {}):
+    def __init__(self, parameters: dict = {}, settings: DefaultSettings = {}):
 
         # Validate the parameters and apply default values if necessary
         self.validate_parameters(parameters, DEFAULT_PARAMETERS)
@@ -56,4 +55,8 @@ class Michalewicz(of.ObjectiveFunction):
         Returns:
             float: The Michalewicz function value at the given position.
         """
-        return -np.sum(np.sin(position) * (np.sin((np.arange(1, len(position) + 1) * position**2) / np.pi))**(2 * self.parameters['m']))
+        return -np.sum(
+            np.sin(position)
+            * (np.sin((np.arange(1, len(position) + 1) * position**2) / np.pi))
+            ** (2 * self.parameters["m"])
+        )

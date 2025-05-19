@@ -1,4 +1,3 @@
-
 # External libraries
 import numpy as np
 
@@ -6,15 +5,19 @@ import numpy as np
 from .. import objective_function as of
 from ..default_settings import DefaultSettings
 
-DEFAULT_PARAMETERS = {'A': 10, 'B': 0.2, 'C': np.pi}
+DEFAULT_PARAMETERS = {"A": 10, "B": 0.2, "C": np.pi}
 
-DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
-                                   optimal_solution=-19.2085,
-                                   optimal_solution_position=[np.array([8.05502, 9.66459]),
-                                                              np.array([-8.05502, -9.66459]),
-                                                              np.array([8.05502, -9.66459]),
-                                                              np.array([-8.05502, 9.66459])],
-                                   search_space_bounds=np.array([[-10, 10], [-10, 10]]))
+DEFAULT_SETTINGS = DefaultSettings(
+    dimensionality=2,
+    optimal_solution=-19.2085,
+    optimal_solution_position=[
+        np.array([8.05502, 9.66459]),
+        np.array([-8.05502, -9.66459]),
+        np.array([8.05502, -9.66459]),
+        np.array([-8.05502, 9.66459]),
+    ],
+    search_space_bounds=np.array([[-10, 10], [-10, 10]]),
+)
 
 
 class HolderTable(of.ObjectiveFunction):
@@ -40,9 +43,7 @@ class HolderTable(of.ObjectiveFunction):
     """
 
     @of.constructor
-    def __init__(self,
-                 parameters: dict = {},
-                 settings: DefaultSettings = {}):
+    def __init__(self, parameters: dict = {}, settings: DefaultSettings = {}):
 
         # Validate the parameters and apply default values if necessary
         self.validate_parameters(parameters, DEFAULT_PARAMETERS)
@@ -67,4 +68,6 @@ class HolderTable(of.ObjectiveFunction):
         x = position[:, 0]
         y = position[:, 1]
 
-        return -np.abs(np.sin(x) * np.cos(y) * np.exp(np.abs(1 - (np.sqrt(x**2 + y**2) / np.pi))))
+        return -np.abs(
+            np.sin(x) * np.cos(y) * np.exp(np.abs(1 - (np.sqrt(x**2 + y**2) / np.pi)))
+        )
