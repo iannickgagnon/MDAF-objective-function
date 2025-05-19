@@ -15,7 +15,23 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
 
 
 class Michalewicz(of.ObjectiveFunction):
+    """
+    Michalewicz objective function implementation.
 
+    This class implements the Michalewicz function, a benchmark function commonly used to evaluate optimization algorithms.
+    The function is known for its steep valleys and ridges, making it difficult for optimization methods to find the global minimum.
+
+    Attributes:
+        parameters (dict): Dictionary containing the parameter 'm' for the Michalewicz function.
+        settings (DefaultSettings): Object containing the search space and other configuration values.
+
+    Methods:
+        __init__(parameters: dict = {}, settings: DefaultSettings = {}):
+            Initializes the function with given parameters and settings, applying defaults if needed.
+        evaluate(position: np.ndarray) -> float:
+            Computes the function value at the given position.
+    """
+    
     @of.constructor
     def __init__(self,
                  parameters: dict = {},

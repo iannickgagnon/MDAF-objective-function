@@ -13,7 +13,23 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2,
 
 
 class Sphere(of.ObjectiveFunction):
-
+    """
+    Sphere objective function implementation.
+    
+    This class implements the Sphere function, a fundamental benchmark in optimization. The Sphere function is
+    characterized by its simple, convex, and continuous landscape, making it a standard test case for evaluating
+    the performance of optimization algorithms.
+    
+    Attributes:
+        settings (DefaultSettings): Object containing the search space and other configuration values.
+    
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with the provided settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Sphere function value at the given position.
+    """
+    
     @of.constructor
     def __init__(self,
                  settings: DefaultSettings = {}):

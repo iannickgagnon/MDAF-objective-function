@@ -18,6 +18,23 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
 
 
 class HolderTable(of.ObjectiveFunction):
+    """
+    Holder Table objective function implementation.
+
+    This class implements the Holder Table function, a multimodal benchmark function commonly used for testing
+    optimization algorithms. The function features multiple local minima and steep valleys, making it a challenging
+    landscape for global optimization techniques.
+
+    Attributes:
+        parameters (dict): Dictionary containing the parameters for the Holder Table function.
+        settings (DefaultSettings): Object containing the search space bounds, optimal solution, and other configuration values.
+
+    Methods:
+        __init__(parameters: dict = {}, settings: DefaultSettings = {}):
+            Initializes the function with specified parameters and settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Holder Table function value at the given position.
+    """
 
     @of.constructor
     def __init__(self,

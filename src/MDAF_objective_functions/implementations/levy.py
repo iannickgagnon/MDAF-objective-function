@@ -13,6 +13,22 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
 
 
 class Levy(of.ObjectiveFunction):
+    """
+    Levy objective function implementation.
+
+    This class implements the Levy function, a standard benchmark for testing optimization algorithms.
+    The Levy function is known for its complex landscape with many local minima, making it difficult
+    for optimization methods to find the global minimum.
+
+    Attributes:
+        settings (DefaultSettings): Object containing the search space bounds, dimensionality, and other configuration values.
+
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with the provided settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Levy function value at the specified position.
+    """
 
     @of.constructor
     def __init__(self,

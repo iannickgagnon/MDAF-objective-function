@@ -13,6 +13,22 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality=2,
 
 
 class StyblinskiTang(of.ObjectiveFunction):
+    """
+    Styblinski-Tang objective function implementation.
+    
+    This class implements the Styblinski-Tang function, a widely used benchmark in global optimization. 
+    The Styblinski-Tang function is multimodal and non-convex, presenting numerous local minima, which 
+    makes it a challenging test case for optimization algorithms.
+    
+    Attributes:
+        settings (DefaultSettings): Object containing the search space and other configuration values.
+    
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with the provided settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Styblinski-Tang function value at the given position.
+    """
 
     @of.constructor
     def __init__(self,

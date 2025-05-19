@@ -13,7 +13,22 @@ DEFAULT_SETTINGS = DefaultSettings(dimensionality = 2,
 
 
 class Bukin6(of.ObjectiveFunction):
+    """
+    Bukin no. 6 objective function implementation.
 
+    This class implements the Bukin no. 6 function, a standard benchmark for optimization algorithms.
+    The function is known for its steep valleys and ridges, presenting a challenging landscape for global optimization.
+
+    Attributes:
+        settings (DefaultSettings): Object containing the search space bounds, optimal solution, and other configuration values.
+
+    Methods:
+        __init__(settings: DefaultSettings = {}):
+            Initializes the function with the provided settings, applying defaults if necessary.
+        evaluate(position: np.ndarray) -> float:
+            Computes the Bukin no. 6 function value at the specified position.
+    """
+    
     @of.constructor
     def __init__(self,
                  settings: DefaultSettings = {}):
