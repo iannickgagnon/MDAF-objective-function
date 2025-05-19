@@ -6,7 +6,7 @@ import timeit
 from abc import ABC, abstractmethod
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from numbers import Number
-from typing import Callable, Iterable
+from typing import Callable, Iterable, Optional
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -307,8 +307,8 @@ class ObjectiveFunction(ABC):
         dimensions: Iterable[int] = (0, 1),
         plot_bounds: Iterable[Iterable[Number]] = None,
         resolution: int = 100,
-        plot_2d_kwargs: dict = {},
-        plot_3d_kwargs: dict = {},
+        plot_2d_kwargs: Optional[dict] = None,
+        plot_3d_kwargs: Optional[dict] = None,
     ) -> None:
         """
         Visualizes the objective function in 2D or 3D.
@@ -317,14 +317,22 @@ class ObjectiveFunction(ABC):
             dimensions (Iterable[int]): The dimensions to visualize. Must be an iterable of length 2 or 3.
             bounds (Iterable[Iterable[Number]]): The bounds of the visualization. Must be an iterable of length 2 or 3.
             resolution (int): The resolution of the visualization grid.
-            plot_2d_kwargs (dict, optional): Additional keyword arguments for the 2D plot.
-            plot_3d_kwargs (dict, optional): Additional keyword arguments for the 3D plot.
+            plot_2d_kwargs (dict, optional): Additional keyword arguments for the 2D plot. Default is None.
+            plot_3d_kwargs (dict, optional): Additional keyword arguments for the 3D plot. Default is None.
 
         Raises:
             AssertionError: If the number of dimensions is not 2 or 3.
             AssertionError: If the number of bounds does not match the number of dimensions.
         """
 
+        # Initialize defaults
+        if plot_2d_kwargs is None:
+            plot_2d_kwargs = {}
+
+        if plot_3d_kwargs is None:
+            plot_3d_kwargs = {}
+
+        # Validate dimensions
         if len(dimensions) not in (1, 2):
             raise ValueError("The number of dimensions to visualize must be 1 or 2.")
 
