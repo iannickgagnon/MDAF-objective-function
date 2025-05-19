@@ -49,4 +49,11 @@ Sphere: type[_Sphere] = _Sphere
 from .implementations.styblinski_tang import StyblinskiTang as _StyblinskiTang
 StyblinskiTang: type[_StyblinskiTang] = _StyblinskiTang
 
-__all__ = ["Ackley", "Bukin6", "Dropwave", "Eggholder", "Franke", "GramacyAndLee", "Griewank", "HolderTable", "Langermann", "Levy", "Michalewicz", "Rastrigin", "Rosenbrock", "SixHumpCamelBack", "Sphere", "StyblinskiTang"]
+__all__ = ["Ackley", "Bukin6", "DropWave", "Eggholder", "Franke", "GramacyAndLee", "Griewank", "HolderTable", "Langermann", "Levy", "Michalewicz", "Rastrigin", "Rosenbrock", "SixHumpCamelBack", "Sphere", "StyblinskiTang"]
+
+def show_all() -> list[str]:
+    """
+    Helper function to list all objective functions available in the package.
+    """
+    return __all__
+

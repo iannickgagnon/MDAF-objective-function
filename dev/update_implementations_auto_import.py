@@ -47,9 +47,21 @@ lines.append(f"__all__ = [{', '.join(all_entries)}]")
 
 # Write to __init__.py
 with open(init_file_path, "w", encoding="utf-8") as f:
+
+    # Write the header
     f.write("# Auto-generated re-exports for top-level API\n")
+    
+    # Write the imports
     f.write("from typing import Type\n\n")
     f.write('\n'.join(lines))
 
+    # Add helper function to list all objective functions
+    f.write("\n\ndef show_all() -> list[str]:\n")
+    f.write('    """\n')
+    f.write('    Helper function to list all objective functions available in the package.\n')
+    f.write('    """\n')
+    f.write('    return __all__\n')
+    f.write('\n')
+    
 print(f"Updated {init_file_path} with {len(all_entries)} exports.")
 

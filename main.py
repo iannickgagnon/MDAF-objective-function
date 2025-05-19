@@ -13,7 +13,7 @@ from MDAF_objective_functions import Levy
 from MDAF_objective_functions import Michalewicz
 from MDAF_objective_functions import Rastrigin
 from MDAF_objective_functions import Rosenbrock
-from MDAF_objective_functions import SixHumpCamelBack,
+from MDAF_objective_functions import SixHumpCamelBack
 from MDAF_objective_functions import Sphere
 from MDAF_objective_functions import StyblinskiTang
 
