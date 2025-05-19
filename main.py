@@ -1,26 +1,22 @@
-# External libraries
 import numpy as np
 
-from MDAF_objective_functions.implementations.ackley import Ackley
-from MDAF_objective_functions.implementations.bukin6 import Bukin6
-from MDAF_objective_functions.implementations.dropwave import DropWave
-from MDAF_objective_functions.implementations.eggholder import Eggholder
-from MDAF_objective_functions.implementations.franke import Franke
-from MDAF_objective_functions.implementations.gramacy_and_lee import GramacyAndLee
-from MDAF_objective_functions.implementations.griewank import Griewank
-from MDAF_objective_functions.implementations.holder_table import HolderTable
-from MDAF_objective_functions.implementations.langermann import Langermann
-from MDAF_objective_functions.implementations.levy import Levy
-from MDAF_objective_functions.implementations.michalewicz import Michalewicz
-from MDAF_objective_functions.implementations.rastrigin import Rastrigin
-from MDAF_objective_functions.implementations.rosenbrock import Rosenbrock
-from MDAF_objective_functions.implementations.six_hump_camel_back import (
-    SixHumpCamelBack,
-)
+from MDAF_objective_functions import Ackley
+from MDAF_objective_functions import Bukin6
+from MDAF_objective_functions import DropWave
+from MDAF_objective_functions import Eggholder
+from MDAF_objective_functions import Franke
+from MDAF_objective_functions import GramacyAndLee
+from MDAF_objective_functions import Griewank
+from MDAF_objective_functions import HolderTable
+from MDAF_objective_functions import Langermann
+from MDAF_objective_functions import Levy
+from MDAF_objective_functions import Michalewicz
+from MDAF_objective_functions import Rastrigin
+from MDAF_objective_functions import Rosenbrock
+from MDAF_objective_functions import SixHumpCamelBack,
+from MDAF_objective_functions import Sphere
+from MDAF_objective_functions import StyblinskiTang
 
-# Internal libraries
-from MDAF_objective_functions.implementations.sphere import Sphere
-from MDAF_objective_functions.implementations.styblinski_tang import StyblinskiTang
 
 if __name__ == "__main__":
 

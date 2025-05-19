@@ -8,7 +8,7 @@ from ..default_settings import DefaultSettings
 DEFAULT_PARAMETERS = {"m": 10}
 
 DEFAULT_SETTINGS = DefaultSettings(
-    dimensionality=2,
+    ndim=2,
     optimal_solution=None,
     optimal_solution_position=None,
     search_space_bounds=[(0, np.pi), (0, np.pi)],

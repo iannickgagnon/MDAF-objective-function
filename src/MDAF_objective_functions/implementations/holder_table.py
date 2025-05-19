@@ -8,7 +8,7 @@ from ..default_settings import DefaultSettings
 DEFAULT_PARAMETERS = {"A": 10, "B": 0.2, "C": np.pi}
 
 DEFAULT_SETTINGS = DefaultSettings(
-    dimensionality=2,
+    ndim=2,
     optimal_solution=-19.2085,
     optimal_solution_position=[
         np.array([8.05502, 9.66459]),

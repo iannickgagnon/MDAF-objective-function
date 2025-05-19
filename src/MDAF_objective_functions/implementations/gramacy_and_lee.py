@@ -6,7 +6,7 @@ from .. import objective_function as of
 from ..default_settings import DefaultSettings
 
 DEFAULT_SETTINGS = DefaultSettings(
-    dimensionality=1,
+    ndim=1,
     optimal_solution=-0.869011135,
     optimal_solution_position=np.array([0.5485634]),
     search_space_bounds=np.array([[0.5, 2.5]]),

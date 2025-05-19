@@ -84,20 +84,20 @@ class ObjectiveFunction(ABC):
             # Validate the size of the optimal solution position
             if (
                 self.optimal_solution_position is not None
-                and optimal_solution_dim != self.dimensionality
+                and optimal_solution_dim != self.ndim
             ):
                 raise ValueError(
                     "The size of the optimal position must match the dimensionality."
                 )
 
             # Validate the size of the search space bounds
-            if len(self.search_space_bounds) != self.dimensionality:
+            if len(self.search_space_bounds) != self.ndim:
                 raise ValueError(
                     "The size of the search space bounds must match the dimensionality of the objective function."
                 )
 
         # Initialize shift
-        self.shift: np.ndarray = np.zeros(self.dimensionality)
+        self.shift: np.ndarray = np.zeros(self.ndim)
         self.noise_mean: float = 0.0
         self.noise_variance: float = 0.0
 
@@ -344,7 +344,7 @@ class ObjectiveFunction(ABC):
         elif not plot_bounds:
             plot_bounds = self.search_space_bounds
 
-        if self.dimensionality == 1 or len(dimensions) == 1:
+        if self.ndim == 1 or len(dimensions) == 1:
 
             # Create the figure and axis
             fig, ax = plt.subplots(figsize=(8, 6))

@@ -6,7 +6,7 @@ class DefaultSettings:
     A class representing the default settings for the objective function.
 
     Args:
-        dimensionality (int): The dimensionality of the problem.
+        ndim (int): The dimensionality of the problem.
         optimal_solution (float): The optimal solution value.
         optimal_solution_position (np.ndarray): The position of the optimal solution.
         search_space_bounds (np.ndarray): The bounds of the search space.
@@ -17,12 +17,12 @@ class DefaultSettings:
 
     def __init__(
         self,
-        dimensionality: int,
+        ndim: int,
         optimal_solution: float,
         optimal_solution_position: np.ndarray,
         search_space_bounds: np.ndarray,
     ):
-        self.dimensionality = dimensionality
+        self.ndim = ndim
         self.optimal_solution = optimal_solution
         self.optimal_solution_position = optimal_solution_position
         self.search_space_bounds = search_space_bounds

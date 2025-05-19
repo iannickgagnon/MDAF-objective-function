@@ -7,8 +7,8 @@ Ackley: type[_Ackley] = _Ackley
 from .implementations.bukin6 import Bukin6 as _Bukin6
 Bukin6: type[_Bukin6] = _Bukin6
 
-from .implementations.dropwave import Dropwave as _Dropwave
-Dropwave: type[_Dropwave] = _Dropwave
+from .implementations.drop_wave import DropWave as _DropWave
+DropWave: type[_DropWave] = _DropWave
 
 from .implementations.eggholder import Eggholder as _Eggholder
 Eggholder: type[_Eggholder] = _Eggholder
