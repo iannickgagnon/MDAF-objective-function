@@ -57,6 +57,9 @@ def constructor(foo: Callable):
 
     def wrapper(self, **kwargs):
 
+        # Initialize parameters
+        self.parameters = {}
+
         # Call the subclass constructor
         foo(self, **kwargs)
 
@@ -69,9 +72,6 @@ def constructor(foo: Callable):
 class ObjectiveFunction(ABC):
 
     def __init__(self):
-
-        # Initialize parameters
-        self.parameters: dict = {}
 
         # Measure the dimensionality of the provided optimal solution position
         if np.any(self.optimal_solution_position):

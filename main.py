@@ -44,15 +44,3 @@ if __name__ == "__main__":
     foo.visualize()
     print(foo.parallel_evaluate(np.array([[1, 1], [2, 2]])))
     """
-
-    """
-    from scipy.optimize import minimize
-    
-    foo = Langermann()
-    bounds = [(0, 10), (0, 10)]
-    result = minimize(foo.evaluate, x0=[1, 10], bounds=bounds)
-
-    # Print the minimum value and the corresponding x and y
-    print(f"Minimum value: {result.fun}")
-    print(f"At position: {result.x}")
-    """
