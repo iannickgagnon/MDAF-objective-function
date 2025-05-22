@@ -1,23 +1,23 @@
 """
-This script updates the `__init__.py` file in the `src/MDAF_objective_functions` directory to automatically import 
+This script updates the `__init__.py` file in the `src/MDAF_benchmarks` directory to automatically import 
 all concrete implementations of the `ObjectiveFunction` class.
 
 This simplified import syntax for clients in the following way:
 
-    from MDAF_objective_functions import Eggholder
+    from MDAF_benchmarks import Eggholder
 
 Instead of:
 
-    from MDAF_objective_functions.implementations.eggholder import Eggholder
+    from MDAF_benchmarks.implementations.eggholder import Eggholder
 """
 
 import os
 
 # Path to concrete implementations of the ObjectiveFunction class
-implementations_path = os.path.join("src", "MDAF_objective_functions", "implementations")
+implementations_path = os.path.join("src", "MDAF_benchmarks", "implementations")
 
 # Path to the __init__.py folder of the implementations folder
-init_file_path = os.path.join("src", "MDAF_objective_functions", "__init__.py")
+init_file_path = os.path.join("src", "MDAF_benchmarks", "__init__.py")
 
 # Helper to convert file name to PascalCase
 def to_class_name(file_name):

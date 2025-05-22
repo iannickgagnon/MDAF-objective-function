@@ -1,23 +1,23 @@
 import numpy as np
 
-from MDAF_objective_functions import Ackley
-from MDAF_objective_functions import Bukin6
-from MDAF_objective_functions import DropWave
-from MDAF_objective_functions import Eggholder
-from MDAF_objective_functions import Franke
-from MDAF_objective_functions import GramacyAndLee
-from MDAF_objective_functions import Griewank
-from MDAF_objective_functions import HolderTable
-from MDAF_objective_functions import Langermann
-from MDAF_objective_functions import Levy
-from MDAF_objective_functions import Michalewicz
-from MDAF_objective_functions import Rastrigin
-from MDAF_objective_functions import Rosenbrock
-from MDAF_objective_functions import SixHumpCamelBack
-from MDAF_objective_functions import Sphere
-from MDAF_objective_functions import StyblinskiTang
+from MDAF_benchmarks import Ackley
+from MDAF_benchmarks import Bukin6
+from MDAF_benchmarks import DropWave
+from MDAF_benchmarks import Eggholder
+from MDAF_benchmarks import Franke
+from MDAF_benchmarks import GramacyAndLee
+from MDAF_benchmarks import Griewank
+from MDAF_benchmarks import HolderTable
+from MDAF_benchmarks import Langermann
+from MDAF_benchmarks import Levy
+from MDAF_benchmarks import Michalewicz
+from MDAF_benchmarks import Rastrigin
+from MDAF_benchmarks import Rosenbrock
+from MDAF_benchmarks import SixHumpCamelBack
+from MDAF_benchmarks import Sphere
+from MDAF_benchmarks import StyblinskiTang
 
-import MDAF_objective_functions as of
+import MDAF_benchmarks as of
 
 if __name__ == "__main__":
 

@@ -31,7 +31,7 @@ class Franke(of.ObjectiveFunction):
             Computes the Franke function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Franke
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Franke
     """
 
     @of.constructor

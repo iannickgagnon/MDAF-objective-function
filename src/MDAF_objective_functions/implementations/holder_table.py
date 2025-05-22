@@ -39,7 +39,7 @@ class HolderTable(of.ObjectiveFunction):
             Computes the Holder Table function value at the given position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Holder-Table
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Holder-Table
     """
 
     @of.constructor

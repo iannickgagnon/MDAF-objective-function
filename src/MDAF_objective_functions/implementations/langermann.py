@@ -37,7 +37,7 @@ class Langermann(of.ObjectiveFunction):
             Computes the Langermann function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Langermann
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Langermann
     """
 
     @of.constructor

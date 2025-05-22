@@ -30,7 +30,7 @@ class Eggholder(of.ObjectiveFunction):
             Computes the Eggholder function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Eggholder
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Eggholder
     """
 
     @of.constructor

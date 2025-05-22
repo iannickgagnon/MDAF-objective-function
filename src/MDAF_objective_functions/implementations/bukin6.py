@@ -30,7 +30,7 @@ class Bukin6(of.ObjectiveFunction):
             Computes the Bukin no. 6 function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Bukin-no.6
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Bukin-no.6
     """
 
     @of.constructor

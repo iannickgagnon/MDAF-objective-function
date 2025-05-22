@@ -31,7 +31,7 @@ class Rosenbrock(of.ObjectiveFunction):
             Computes the Rosenbrock function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Rosenbrock
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Rosenbrock
     """
 
     @of.constructor

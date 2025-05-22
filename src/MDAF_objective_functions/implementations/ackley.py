@@ -34,7 +34,7 @@ class Ackley(of.ObjectiveFunction):
             Computes the function value at the given position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Ackley
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Ackley
     """
 
     @of.constructor

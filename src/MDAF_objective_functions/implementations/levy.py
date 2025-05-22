@@ -31,7 +31,7 @@ class Levy(of.ObjectiveFunction):
             Computes the Levy function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Levy
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Levy
     """
 
     @of.constructor

@@ -259,7 +259,7 @@ class ObjectiveFunction(ABC):
             # Import the decoupled evaluate function
             if os.path.exists(DECOUPLED_FUNCTION_PATH):
                 try:
-                    from mdaf_objective_functions.tmp.decoupled_evaluate import ( # type: ignore
+                    from MDAF_benchmarks.tmp.decoupled_evaluate import ( # type: ignore
                         evaluate as decoupled_evaluate,
                     ) 
                 except Exception as e:

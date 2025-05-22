@@ -5,7 +5,7 @@ The Metaheuristics Design And Analysis Framework (MDAF) is an open-source collec
 
 # The Objective Function Module
 
-The `MDAF_objective_functions` module  is a specialized tool designed to streamline the process of defining and evaluating objective functions. It offers a low-code template that simplifies the setup and execution of complex objective functions, allowing researchers to concentrate more on refining their algorithms and less on the intricacies of coding.
+The `MDAF_benchmarks` module  is a specialized tool designed to streamline the process of defining and evaluating objective functions. It offers a low-code template that simplifies the setup and execution of complex objective functions, allowing researchers to concentrate more on refining their algorithms and less on the intricacies of coding.
 
 ## Version
 
@@ -21,17 +21,17 @@ Calendar versioning was preferred over semantic versioning (SemVer) to facilitat
 
 **APA Style**:
 ```
-Gagnon, I. (YEAR). Metaheuristics Design and Analysis Framework (MDAF), Version MAJOR.YEAR.NUMBER [Software]. Retrieved from https://github.com/iannickgagnon/MDAF_objective_functions.
+Gagnon, I. (YEAR). Metaheuristics Design and Analysis Framework (MDAF), Version MAJOR.YEAR.NUMBER [Software]. Retrieved from https://github.com/iannickgagnon/MDAF_benchmarks.
 ```
 
 **MLA Style**: 
 ```
-Gagnon, Iannick. Metaheuristics Design And Analysis Framework. Version MAJOR.YEAR.NUMBER. YEAR. Software. Accessed DAY-MONTH-YEAR. https://github.com/iannickgagnon/MDAF_objective_functions.
+Gagnon, Iannick. Metaheuristics Design And Analysis Framework. Version MAJOR.YEAR.NUMBER. YEAR. Software. Accessed DAY-MONTH-YEAR. https://github.com/iannickgagnon/MDAF_benchmarks.
 ```
 
 **Chicago Style**:
 ```
-Gagnon, Iannick. YEAR. Metaheuristics Design And Analysis Framework (MDAF), Version MAJOR.YEAR.NUMBER. Software. https://github.com/iannickgagnon/MDAF_objective_functions.
+Gagnon, Iannick. YEAR. Metaheuristics Design And Analysis Framework (MDAF), Version MAJOR.YEAR.NUMBER. Software. https://github.com/iannickgagnon/MDAF_benchmarks.
 ```
 
 Replace `YEAR` with the year of the version used, `MAJOR.YEAR.NUMBER` with the full version and `DAY-MONTH-YEAR` with the date you accessed the software online (i.e., the date at which you cloned the repo).
@@ -57,7 +57,7 @@ Install Python's package manager if you don't have it already:
 Run the following command:
 
 ```bash
-pip install MDAF_objective_functions
+pip install MDAF_benchmarks
 ```
 
 Use the following command to install this library:
@@ -71,7 +71,7 @@ Install the open source git version control software if you don't have it alread
 Clone this repository to your local machine using:
 
 ```bash
-git clone https://github.com/iannickgagnon/MDAF_objective_functions.git
+git clone https://github.com/iannickgagnon/MDAF_benchmarks.git
 ```
 
 If you aren't familiar with git, you may wish to consult the following online e-book for free:
@@ -83,7 +83,7 @@ I have also greatly benefited from the following official cheat sheet from GitHu
 
 ## Documentation
 
-Visit the `MDAF_objective_functions` wiki ([click here](https://github.com/iannickgagnon/MDAF_objective_functions/wiki)) for the following : 
+Visit the `MDAF_benchmarks` wiki ([click here](https://github.com/iannickgagnon/MDAF_benchmarks/wiki)) for the following : 
 
 * User guide
 * Contribution guide
@@ -91,8 +91,8 @@ Visit the `MDAF_objective_functions` wiki ([click here](https://github.com/ianni
 
 ## Future work
 
-- **Multiple objectives**: Derive a `MultiobjectiveFunction` class from `ObjectiveFunction`. See Issue https://github.com/iannickgagnon/MDAF_objective_functions/issues/9.
-- **Enhance timing**: Enable timing for the `ObjectiveFunction.parallel_evaluate()` method. See Issue https://github.com/iannickgagnon/MDAF_objective_functions/issues/11.
+- **Multiple objectives**: Derive a `MultiobjectiveFunction` class from `ObjectiveFunction`. See Issue https://github.com/iannickgagnon/MDAF_benchmarks/issues/9.
+- **Enhance timing**: Enable timing for the `ObjectiveFunction.parallel_evaluate()` method. See Issue https://github.com/iannickgagnon/MDAF_benchmarks/issues/11.
 
 ## Contact
 

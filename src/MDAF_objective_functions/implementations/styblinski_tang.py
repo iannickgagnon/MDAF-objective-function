@@ -31,7 +31,7 @@ class StyblinskiTang(of.ObjectiveFunction):
             Computes the Styblinski-Tang function value at the given position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Styblinski%E2%80%90Tang
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Styblinski%E2%80%90Tang
     """
 
     @of.constructor

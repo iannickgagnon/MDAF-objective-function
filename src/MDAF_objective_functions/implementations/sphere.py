@@ -31,7 +31,7 @@ class Sphere(of.ObjectiveFunction):
             Computes the Sphere function value at the given position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Sphere
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Sphere
     """
 
     @of.constructor

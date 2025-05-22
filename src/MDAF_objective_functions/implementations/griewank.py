@@ -31,7 +31,7 @@ class Griewank(of.ObjectiveFunction):
             Computes the Griewank function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Griewank
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Griewank
     """
 
     @of.constructor

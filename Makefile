@@ -1,7 +1,7 @@
 # Makefile for generating UML diagrams using pyreverse and Graphviz (.dot)
 
-PACKAGE_PATH=src/MDAF_objective_functions/
-PROJECT_NAME=MDAF_objective_functions
+PACKAGE_PATH=src/MDAF_benchmarks/
+PROJECT_NAME=MDAF_benchmarks
 OUTPUT_FORMAT=png
 
 class-diagram:

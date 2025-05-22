@@ -31,7 +31,7 @@ class GramacyAndLee(of.ObjectiveFunction):
             Computes the function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Gramacy-and-Lee
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Gramacy-and-Lee
     """
 
     @of.constructor

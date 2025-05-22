@@ -31,7 +31,7 @@ class DropWave(of.ObjectiveFunction):
             Computes the DropWave function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Drop%E2%80%90Wave
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Drop%E2%80%90Wave
     """
 
     @of.constructor

@@ -34,7 +34,7 @@ class SixHumpCamelBack(of.ObjectiveFunction):
             Computes the function value at the specified position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Six-Hump-Camel-Back
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Six-Hump-Camel-Back
     """
 
     @of.constructor

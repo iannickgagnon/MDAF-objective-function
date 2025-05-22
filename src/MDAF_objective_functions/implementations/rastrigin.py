@@ -34,7 +34,7 @@ class Rastrigin(of.ObjectiveFunction):
             Computes the function value at the given position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Rastrigin
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Rastrigin
     """
 
     @of.constructor

@@ -33,7 +33,7 @@ class Michalewicz(of.ObjectiveFunction):
             Computes the function value at the given position.
 
     Reference:
-        https://github.com/iannickgagnon/MDAF_objective_functions/wiki/Michalewicz
+        https://github.com/iannickgagnon/MDAF_benchmarks/wiki/Michalewicz
     """
 
     @of.constructor
