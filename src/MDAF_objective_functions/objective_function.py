@@ -212,11 +212,11 @@ class ObjectiveFunction(ABC):
         """
 
         # Wrap the evaluation function
-        wrapper = lambda: self.evaluate(
-            np.array(
-                [np.random.uniform(low, high) for low, high in self.search_space_bounds]
+        def wrapper():
+            position = np.array(
+            [np.random.uniform(low, high) for low, high in self.search_space_bounds]
             )
-        )
+            return self.evaluate(position)
 
         # Generate the bootstrap sample
         bootstrap_times = np.array(
