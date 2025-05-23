@@ -1,4 +1,5 @@
 import inspect
+import logging
 import os
 import pickle
 import re
@@ -19,6 +20,74 @@ RIGHT_CLICK = 3
 
 # Internal paths
 DECOUPLED_FUNCTION_PATH = "./src/objective_functions/tmp/decoupled_evaluate.py"
+
+# Create module-specific logger with default warning level set to WARNING
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.WARNING)
+
+
+class ColorFormatter(logging.Formatter):
+    """
+    A custom logging formatter that adds ANSI color codes to log messages based on their severity level.
+
+    Attributes:
+        COLORS (dict): A mapping from log level names to their corresponding ANSI color codes.
+
+    Methods:
+        format(record):
+            Formats the specified log record with the appropriate color based on its level.
+
+    Args:
+        record (logging.LogRecord): The log record to be formatted.
+
+    Returns:
+        str: The formatted log message string with ANSI color codes applied.
+    """
+
+    COLORS = {
+        "WARNING": "\033[93m",
+        "INFO": "\033[92m",
+        "ERROR": "\033[91m",
+        "DEBUG": "\033[94m",
+    }
+
+    def format(self, record: logging.LogRecord) -> str:
+        """
+        Formats the log record with an appropriate color based on its level.
+
+        Args:
+            record (logging.LogRecord): The log record to be formatted.
+
+        Returns:
+            str: The formatted log message string with color codes applied.
+        """
+
+        # Get the ASCII color code for the log level
+        color = self.COLORS.get(record.levelname, "")
+
+        # Format the message with the color code by sending it to the formatter
+        message = super().format(record)
+
+        return f"{color}{message}'\033[0m"
+
+
+# Create a console handler for color formatting
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(ColorFormatter("%(levelname)s: %(message)s"))
+logger.addHandler(console_handler)
+
+
+def set_verbose_warnings(enabled: bool = True) -> None:
+    """
+    Enable or disable warning messages.
+
+    Args:
+        enabled (bool, optional): If True, enable warning messages. If False, disable them. Defaults to True.
+
+    Returns:
+        None
+    """
+    logger.setLevel(logging.WARNING if enabled else logging.ERROR)
 
 
 def count_calls(foo: Callable) -> Callable:
@@ -139,8 +208,8 @@ class ObjectiveFunction(ABC):
                 self.parameters[parameter_name] = parameters[parameter_name]
             else:
                 default_value = default_params[parameter_name]
-                print(
-                    f"\033[93mWARNING: The '{parameter_name}' parameter is not set. Default value of {default_value} is used.\033[0m"
+                logger.warning(
+                    f"The '{parameter_name}' parameter is not set. Default value of {default_value} is used instead."
                 )
                 self.parameters[parameter_name] = default_value
 
@@ -162,8 +231,8 @@ class ObjectiveFunction(ABC):
                 self.__dict__[setting_name] = settings[setting_name]
             else:
                 default_value = default_settings[setting_name]
-                print(
-                    f"\033[93mWARNING: The '{setting_name}' setting is not set. The default value of {default_value} is used.\033[0m"
+                logger.warning(
+                    f"The '{setting_name}' setting is not set. The default value of {default_value} is used."
                 )
                 self.__dict__[setting_name] = default_value
 
@@ -214,7 +283,7 @@ class ObjectiveFunction(ABC):
         # Wrap the evaluation function
         def wrapper():
             position = np.array(
-            [np.random.uniform(low, high) for low, high in self.search_space_bounds]
+                [np.random.uniform(low, high) for low, high in self.search_space_bounds]
             )
             return self.evaluate(position)
 
@@ -233,7 +302,7 @@ class ObjectiveFunction(ABC):
         if output:
             return [mean_time, (lower_bound, upper_bound)]
         else:
-            print(
+            logger.info(
                 f"Execution time (n={nb_runs}): {mean_time:.3e} 95% CI ({lower_bound:.3e}, {upper_bound:.3e})"
             )
 
@@ -259,9 +328,9 @@ class ObjectiveFunction(ABC):
             # Import the decoupled evaluate function
             if os.path.exists(DECOUPLED_FUNCTION_PATH):
                 try:
-                    from MDAF_benchmarks.tmp.decoupled_evaluate import ( # type: ignore
+                    from MDAF_benchmarks.tmp.decoupled_evaluate import (  # type: ignore
                         evaluate as decoupled_evaluate,
-                    ) 
+                    )
                 except Exception as e:
                     raise ImportError(
                         f"Failed to import the decoupled evaluate method with traceback: {e}"
@@ -293,7 +362,9 @@ class ObjectiveFunction(ABC):
                 try:
                     result = future.result()
                 except Exception as e:
-                    print(f"Position at index {index} generated an exception: {e}")
+                    logger.error(
+                        f"Position at index {index} generated an exception: {e}"
+                    )
                 else:
                     results[index] = result
 
@@ -592,7 +663,7 @@ class ObjectiveFunction(ABC):
         """
         with open(path, "wb") as file:
             pickle.dump(self, file)
-            print("\033[92mObjectiveFunction state saved in {path}\033[0m")
+            logger.info("ObjectiveFunction state saved in {path}")
 
     @staticmethod
     def load(path: str):
@@ -607,7 +678,7 @@ class ObjectiveFunction(ABC):
         """
         with open(path, "rb") as f:
             obj = pickle.load(f)
-            print("\033[92mObjectiveFunction state loaded from {path}\033[0m")
+            logger.info("ObjectiveFunction state loaded from {path}")
             return obj
 
     def __remove_self_references(self, code: str) -> str:
@@ -807,7 +878,7 @@ class ObjectiveFunction(ABC):
                 self.evaluate(position)
 
         # Print the profiling message
-        print("\n\033[92mLine-by-line profiling of the evaluate method:\n\033[0m")
+        logger.info("\nLine-by-line profiling of the .evaluate() method:\n")
 
         # Create an instance of LineProfiler and add the evaluate method to it
         profiler = LineProfiler()
