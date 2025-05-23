@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from autograd import grad, hessian
 from line_profiler import LineProfiler
+from src.MDAF_benchmarks.default_settings import DefaultSettings
 
 # Internal constants
 LEFT_CLICK = 1
@@ -213,7 +214,7 @@ class ObjectiveFunction(ABC):
                 )
                 self.parameters[parameter_name] = default_value
 
-    def validate_settings(self, settings: dict, default_settings: dict):
+    def validate_settings(self, settings: dict, default_settings: DefaultSettings):
         """
         Validates the settings of the objective function.
 
