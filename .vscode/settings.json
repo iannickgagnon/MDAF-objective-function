@@ -6,7 +6,7 @@
     // Specify the test framework and arguments
     "python.testing.pytestEnabled": true,
     "python.testing.pytestArgs": [
-        "tests"
+        "test"
     ],
     
     // File explorer settings
@@ -23,6 +23,7 @@
     "markdown": true,
     "scminput": true
     },
-    "editor.inlineSuggest.enabled": true
+    "editor.inlineSuggest.enabled": true,
+    "python.testing.unittestEnabled": false
 
 }
